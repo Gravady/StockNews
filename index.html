@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--Google SEO-->
+    <!--SEO-->
+    <title>Titel Placeholder</title>
     <meta charset="UTF-8">
+    <meta name="language" content="ES, SV">
+    <meta name="revised" content="Monday, April 7th, 2025, 10:51"> <!--Change time when revised-->
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta name="google-site-verification" content="key_placeholder"> 
-    <meta name="robots" content="noindex, nofollow, noarchive">
-    <title>Titel Placeholder</title>
+    <meta name="robots" content="noindex, follow, noarchive">
+    <meta name="author" content="name_placeholder">
+    <meta name="owner" content="name_placeholder">
+    <meta name="description" content="Web stock exchange live feed!">
+    <meta name="subject" content="Live stock exchange">
+    <meta name="keywords" content="
+    Live stocks, stock exchange, live feed, stock market
+    stocks, market, news, market news, market updates, charts, 
+    stock charts, stock market charts"> <!--Keywords are not used-->
+
+
+    <!--Google SEO-->
+    <meta name="googlebot-news" content="nosnippet">
+    <meta name="googlebot" content="translate, follow, noindex, noarchive">
+
+    <!--General-->
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+    <!--Javascript popup-->
+    <noscript>
+       <h1>Javascript is currently disabled, please enable javascript, please enable it and refresh</h1>
+       <a href="https://www.bigcommerce.com/glossary/javascript/">Why does this website need javascript?</a>
+       <form method="get">
+            <button type="submit" alt="Refresh website">Refresh website</button>
+       </form>
+    </noscript>
+
    <nav>
         <div class="nav_button_wrapper">
-            <a href = "about.html" class="nav_button">About</a>
-            <div id="nav_stocks" class="nav_button">Stocks</div>
-            <div id="nav_settings" class="nav_button">Settings</div>
+            <a href = "about.html" title="About button" class="nav_button">About</a>
+            <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
+            <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
         </div> 
-        <h1 id="nav_title">Live Feed</h1>
-        <input type="search_bar" placeholder="Search..." autocomplete="off">
+        <h1 id="nav_title" alt="Live Feed, title">Live Feed</h1>
+        <input type="search_bar" title="Input search bar" placeholder="Search..." autocomplete="off">
     </nav> 
-    <div class="stock_blocks">
+    <div class="stock_blocks" title="Stock block">
         <span id="stock_block_1">Stocks</span>
         <span id="stock_block_2">Stocks</span>
         <span id="stock_block_3">Stocks</span>
     </div>
    <main>
-       <img src="../Pictures/new-york-stock-exchange.jpeg"></img>
+       <img src="../Pictures/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"></img>
        <div id="stock_map_wrapper">
-            <div id="stock_map_ui"></div>
-            <div id="stock_map_settings"></div>
+            <div id="stock_map_ui" title="Graphical chart of a certain stock"></div>
+            <div id="stock_map_settings" title="Graphical chart configuration settings"></div>
        </div>
        <div class="media">
-            <div id="media_1"></div>
-            <div id="media_2"></div>
-            <div id="media_3"></div>
+            <!--Media placeholder should be changed in javascript-->
+            <div id="media_1" title="media_placeholder_1"></div>
+            <div id="media_2" title="media_placeholder_2"></div>
+            <div id="media_3" title="media_placeholder_3"></div>
        </div>
        <footer>
-            <div id="copyright"></div>
-            <div id="legal"></div>   
-            <div id="contact"></div>
+            <div id="copyright" title="copyright section/button"></div>
+            <div id="legal" title="legal section/button"></div>   
+            <div id="contact" title="contact section/button"></div>
        </footer>
    </main> 
-
 </body>
 </html>
