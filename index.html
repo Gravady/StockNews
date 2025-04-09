@@ -24,15 +24,57 @@
     <meta name="googlebot" content="translate, follow, noindex, noarchive">
 
     <!--General-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/style.css">
 
 </head>
 <body>
     <!--Javascript popup-->
     <noscript>
+        <!--CSS needs to be in noscript tag-->
+        <style>
+            noscript{
+                display: flex;
+                flex-direction: column;
+                text-align:center;
+                font-size: 1.2em;
+                background-color:yellow;
+                align-items: center;
+                margin:5px;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+            noscript:target{
+                scroll-margin-top:100px;
+            }
+            noscript > * {
+                border-radius: 15px;
+                box-shadow: 4px 4px 5px rgba(0,0,0,3);
+            }
+
+            noscript > h1{
+                font-size: 2em;
+                box-shadow:none;
+            }
+            noscript > a{
+                font-size: 1.2em;
+                text-decoration: none;
+                background-color: orange;
+                width: 30%;
+            }
+            noscript > form{
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
+            noscript > form:hover{
+                transform: scale(1.2)
+            }
+        </style>
        <h1>Javascript is currently disabled, please enable javascript, please enable it and refresh</h1>
        <a href="https://www.bigcommerce.com/glossary/javascript/">Why does this website need javascript?</a>
-       <form method="get">
+       <form method="get" autofocus>
             <button type="submit" alt="Refresh website">Refresh website</button>
        </form>
     </noscript>
@@ -44,29 +86,73 @@
             <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
         </div> 
         <h1 id="nav_title" alt="Live Feed, title">Live Feed</h1>
-        <input type="search_bar" title="Input search bar" placeholder="Search..." autocomplete="off">
+        <input type="search" id="nav_search_bar" title="Input search bar" placeholder="Search..." autocomplete="off">
     </nav> 
+    <!--Stock blocks will display possitive or negative-->
+    <!--May be generated with javascript instead-->
     <div class="stock_blocks" title="Stock block">
-        <span id="stock_block_1">Stocks</span>
-        <span id="stock_block_2">Stocks</span>
-        <span id="stock_block_3">Stocks</span>
+
+        <span class="stock_row">
+            <div class="stock_block" id="stock_block_1_1">
+                <h3>Stock1</h3>
+                <span>Stock status</span>  
+            </div>
+            <div class="stock_block" id="stock_block_1_2">
+                <h3>Stock2</h3>
+                <span>Stock status</span>
+            </div>
+            <div class="stock_block" id="stock_block_1_3">
+                <h3>Stock3</h3>
+                <span>Stock status</span>
+            </div>
+        </span>
+
+        <span class="stock_row">
+            <div class="stock_block" id="stock_block_2_1">
+                <h3>Stocks4</h3>
+                <span>Stock status</span>
+            </div>
+            <div class="stock_block" id="stock_block_2_2">
+                <h3>Stocks5</h3>
+                <span>Stock status</span>
+            </div>
+            <div class="stock_block" id="stock_block_2_3">
+                <h3>Stocks6</h3>
+                <span>Stock status</span>
+            </div>
+        </span>
+
+        <span class="stock_row">
+            <div class="stock_block" id="stock_block_3_1">
+                <h3>Stock7</h3>
+                <span>Stock status</span>
+            </div>
+            <div class="stock_block" id="stock_block_3_2">
+                <h3>Stock8</h3>
+                <span>Stock staus</span>
+            </div>
+            <div class="stock_block" id="stock_block_3_3">
+                <h3>Stock9</h3>
+                <span>Stock status</span>
+            </div>
+        </span>
     </div>
    <main>
-       <img src="../Pictures/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"></img>
+       <img src="../Images/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"></img>
        <div id="stock_map_wrapper">
-            <div id="stock_map_ui" title="Graphical chart of a certain stock"></div>
-            <div id="stock_map_settings" title="Graphical chart configuration settings"></div>
+            <div id="stock_map_ui" title="Graphical chart of a certain stock">Graphical display</div>
+            <div id="stock_map_settings" title="Graphical chart configuration settings">Setting</div>
        </div>
        <div class="media">
             <!--Media placeholder should be changed in javascript-->
-            <div id="media_1" title="media_placeholder_1"></div>
-            <div id="media_2" title="media_placeholder_2"></div>
-            <div id="media_3" title="media_placeholder_3"></div>
+            <div id="media_1" title="media_placeholder_1">Socials1</div>
+            <div id="media_2" title="media_placeholder_2">Socials2</div>
+            <div id="media_3" title="media_placeholder_3">Socials3</div>
        </div>
        <footer>
-            <div id="copyright" title="copyright section/button"></div>
-            <div id="legal" title="legal section/button"></div>   
-            <div id="contact" title="contact section/button"></div>
+            <div id="copyright" title="copyright section/button">Copyright</div>
+            <div id="legal" title="legal section/button">Legal</div>   
+            <div id="contact" title="contact section/button">Contact</div>
        </footer>
    </main> 
 </body>
