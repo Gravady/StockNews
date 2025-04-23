@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Security-->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src
+     'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+
     <!--SEO-->
     <title>Titel Placeholder</title>
     <meta charset="UTF-8">
@@ -81,9 +85,23 @@
 
    <nav>
         <div class="nav_button_wrapper">
-            <a href = "about.html" title="About button" class="nav_button">About</a>
-            <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
-            <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
+            <a href = "about.html" id="nav_about" title="About button" class="nav_button">About</a>
+
+            <div class="stocks_wrapper">
+                <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
+                <div id="sub_stock_menu">
+                    <p id="stock_1">Stock Category 1</p>
+                    <p id="stock_2">Stock Category 2</p>
+                </div>
+            </div>
+
+            <div class="settings_wrapper">
+                <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
+                <div id="sub_setting_menu">
+                    <p id="setting1" title="Settings button placeholder">Settings1</p>
+                    <p id="setting2" title="Settings button placeholder">Settings2</p>
+                </div>
+            </div>
         </div> 
         <h1 id="nav_title" alt="Live Feed, title">Live Feed</h1>
         <input type="search" id="nav_search_bar" title="Input search bar" placeholder="Search..." autocomplete="off">
@@ -139,21 +157,35 @@
     </div>
    <main>
        <img src="../Images/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"></img>
-       <div id="stock_map_wrapper">
-            <div id="stock_map_ui" title="Graphical chart of a certain stock">Graphical display</div>
-            <div id="stock_map_settings" title="Graphical chart configuration settings">Setting</div>
+       <div id="full_stock_wrapper">
+            <div id="stock_map_wrapper">
+                    <div id="stock_map_ui" title="Graphical chart of a certain stock">Graphical display</div>
+                    <div id="stock_map_settings" title="Graphical chart configuration settings"></div>
+                <div id="media_items">
+                    <!--Media placeholder should be changed in javascript-->
+                    <div id="media_1" class="media" title="media_placeholder_1">
+                        <h3 id="social_media_title_1" class="social_media_title_class">Social media title</h3>
+                        <p id="social_media_text_1" class="social_media_text_class">Social media text</p>
+                        <div id="social_media_post_eval_1" class="social_media_post_eval_class">Post evaluation</div>
+                    </div>
+                    <div id="media_2" class="media" title="media_placeholder_2">
+                        <h3 id="social_media_title_2" class="social_media_title_class">Social media title</h3>
+                        <p id="social_media_text_2" class="social_media_text_class">Social media text</p>
+                        <div id="social_media_post_eval_2" class="social_media_post_eval_class">Post evaluation</div>
+                    </div>
+                    <div id="media_3" class="media" title="media_placeholder_3">
+                        <h3 id="social_media_text_3" class="social_media_title_class">Social media title</h3>
+                        <p id="social_media_text_3" class="social_media_text_class">Social media text</p>
+                        <div id="social_media_post_eval_3" class="social_media_post_eval_class">Post evaluation</div>
+                    </div>
+                </div>
+            </div>
        </div>
-       <div class="media">
-            <!--Media placeholder should be changed in javascript-->
-            <div id="media_1" title="media_placeholder_1">Socials1</div>
-            <div id="media_2" title="media_placeholder_2">Socials2</div>
-            <div id="media_3" title="media_placeholder_3">Socials3</div>
-       </div>
-       <footer>
-            <div id="copyright" title="copyright section/button">Copyright</div>
-            <div id="legal" title="legal section/button">Legal</div>   
-            <div id="contact" title="contact section/button">Contact</div>
-       </footer>
-   </main> 
+    </main> 
+    <footer>
+        <div id="copyright" title="copyright section/button">Copyright</div>
+        <div id="legal" title="legal section/button">Legal</div>   
+        <div id="contact" title="contact section/button">Contact</div>
+    </footer>
 </body>
 </html>
