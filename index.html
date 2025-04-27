@@ -87,19 +87,19 @@
         <div class="nav_button_wrapper">
             <a href = "about.html" id="nav_about" title="About button" class="nav_button">About</a>
 
-            <div class="stocks_wrapper">
+            <div class="general_wrapper">
                 <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
                 <div id="sub_stock_menu">
-                    <p id="stock_1">Stock Category 1</p>
-                    <p id="stock_2">Stock Category 2</p>
+                    <p id="stock_1" class="stock">NASDAQ</p>
+                    <p id="stock_2" class="stock">Bitcoin</p>
                 </div>
             </div>
 
-            <div class="settings_wrapper">
+            <div class="general_wrapper">
                 <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
                 <div id="sub_setting_menu">
-                    <p id="setting1" title="Settings button placeholder">Settings1</p>
-                    <p id="setting2" title="Settings button placeholder">Settings2</p>
+                    <p id="setting1" class="setting" title="Settings button placeholder">Settings1</p>
+                    <p id="setting2" class="setting" title="Settings button placeholder">Settings2</p>
                 </div>
             </div>
         </div> 
@@ -187,5 +187,9 @@
         <div id="legal" title="legal section/button">Legal</div>   
         <div id="contact" title="contact section/button">Contact</div>
     </footer>
+
+    <script src="JS/init.js"></script>
+    <script src="JS/nav.js"></script>
+    <script src="JS/localstorage.js"></script>
 </body>
 </html>

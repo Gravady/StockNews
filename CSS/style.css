@@ -27,7 +27,7 @@ nav {
 .nav_button_wrapper {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 20px;
     grid-area: nav_button_wrapper;
 }
 
@@ -46,20 +46,23 @@ nav {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+/*--------------------------------------------------------------------*/
 #nav_about {
 
 }
 
-.stocks_wrapper {
-    position: relative;
+/*--------------------------------------------------------------------*/
+
+.general_wrapper{
+    position:relative;
     display: inline-block;
 }
 
-.stocks_wrapper:hover #sub_stock_menu {
+.general_wrapper:hover #sub_stock_menu {
     display: flex;
 }
 
+/*Restrict font size*/
 #sub_stock_menu {
     all: inherit;
     display: none;
@@ -70,6 +73,7 @@ nav {
     flex-direction: column;
     gap: 5px;
     left: 0px;
+    right:0px;
     top: 0px;
 }
 
@@ -84,18 +88,7 @@ nav {
 }
 
 /*----------------------------------------------------------------------------*/
-
-/* Make this general_wrapper instead of settings and stock wrapper work */
-.general_wrapper{
-
-}
-
-.settings_wrapper{
-    position: relative;
-    display:inline-block;
-}
-
-.settings_wrapper:hover #sub_setting_menu{
+.general_wrapper:hover #sub_setting_menu{
     display:flex;
 }
 
