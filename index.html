@@ -83,6 +83,17 @@
        </form>
     </noscript>
 
+    <!--Warning window for things like invalid settings-->
+    <p id="warning_window" title="Warning window">
+        <h2>Title</h2>
+        <p>Description</p>
+        <!--Buttons for closing and accepting warning-->
+        <!--Accept=make javascript change setting for you-->
+        <!--Close=ignore warning-->
+        <button id="close_button">Close</button>
+        <button id="accept_button">Accept</button>
+    </p>
+
    <nav>
         <div class="nav_button_wrapper">
             <a href = "about.html" id="nav_about" title="About button" class="nav_button">About</a>
@@ -98,8 +109,21 @@
             <div class="general_wrapper">
                 <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
                 <div id="sub_setting_menu">
-                    <p id="setting1" class="setting" title="Settings button placeholder">Settings1</p>
-                    <p id="setting2" class="setting" title="Settings button placeholder">Settings2</p>
+                    <p id="setting1" class="setting" title="Settings button placeholder">DarkMode</p>
+
+                    <p id="setting2" class="setting" title="Settings button placeholder">Language</p>
+
+                    <!--Social media examples-->
+                    <p id="setting3" class="setting" title="Settings button placeholder">Social media</p>
+                    <div id="social_settings_wrapper">
+                        <p>Twitter/X</p>
+                        <p>Instagram</p>
+                        <p>Facebook</p>
+                        <p>Reddit</p>
+                        <p>4Chan</p>
+                        <p>NYStockExchange</p>
+                    </div>
+
                 </div>
             </div>
         </div> 
@@ -109,7 +133,6 @@
     <!--Stock blocks will display possitive or negative-->
     <!--May be generated with javascript instead-->
     <div class="stock_blocks" title="Stock block">
-
         <span class="stock_row">
             <div class="stock_block" id="stock_block_1_1">
                 <h3>Stock1</h3>
@@ -191,5 +214,8 @@
     <script src="JS/init.js"></script>
     <script src="JS/nav.js"></script>
     <script src="JS/localstorage.js"></script>
+    <script src="JS/settings.js"></script>
+    <script src="JS/socials.js"></script>
+    <script src="JS/chart.js"></script>
 </body>
 </html>
