@@ -1,13 +1,16 @@
-import dotenv from 'dotenv';
-import axios from 'axios';
+// hello.js
+const http = require('http');
 
-const secretKey = process.env.API_KEY;
+const server = http.createServer((req, res) => {
+  if (req.url === '/hello') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello, world!\n');
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found\n');
+  }
+});
 
-const cors = require('cors');
-
-app.use(cors());
-
-//Generate API key
-app.get('/api/api-key', (req, res) => {
-    res.json({ apiKey: process.env.API_KEY });
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000/');
 });
