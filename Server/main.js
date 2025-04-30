@@ -31,6 +31,8 @@ async function fetchData() {
 
 // Middleware to check cache validity
 function checkCache(req, res, next) {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  console.log(`Client IP: ${ip}`);
   const now = Date.now();
 
   // If cached data exists and it's not older than 6 hours, return it
