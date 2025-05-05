@@ -1,6 +1,7 @@
 console.log("Nav is working");
 
 // May be changed
+const stock_option_ui_limit = 1;
 const stock_option_limit = 5;
 
 function getNavAttributes() {
@@ -19,7 +20,7 @@ function getSelected() {
 
 function addSelected(id) {
     const selected = getSelected();
-    if (!selected.includes(id)) { // Prevent duplicates
+    if (!selected.includes(id)) {
         selected.push(id);
         localStorage.setItem("Selected", JSON.stringify(selected));
     }
@@ -49,14 +50,30 @@ function toggleSelection(el) {
     }
 }
 
-// Handle stocks with a limit
+//Toggle selection of the stock to be displayed in UI
+function toggleUISelection(el){
+    const id = el.id;
+    const selected = getSelected();
+    if (!selected.includes(id) && selected.length >= stock_option_ui_limit) {
+        el.style.backgroundColor = "transparent";
+        el.style.fontWeight = "normal";
+        console.log("Only one stock can be selected at a time!");
+        return;
+    }
+    //Make the selected stock UI red instead of gray since only one can be selected at a time
+    el.style.backgroundColor = "red";
+    el.style.fontWeight = "bold";
+
+}
+
+// Handle stocks with a limit, only one stock selected at a time
 document.querySelectorAll(".stock").forEach((el, index) => {
     if (index < stock_option_limit) {
         el.addEventListener("click", (event) => {
             const selected = getSelected();
             if (!selected.includes(el.id) && selected.length >= stock_option_limit) {
                 console.log("Stock option limit reached!");
-                return; // Prevent selecting more than limit
+                return;
             }
             toggleSelection(el);
         });
@@ -83,7 +100,7 @@ function loadSelectedItems() {
 }
 
 // Clear selected items visually (optional, you may call this when needed)
-function clearSelectedItems() {
+function removeSelectedItems() {
     const ids = getSelected();
     ids.forEach(id => {
         const el = document.getElementById(id);
@@ -119,6 +136,35 @@ function getSettingIndex() {
     });
 
     return names;
+}
+
+//Get current stock that is selected to be displayed in UI
+function getCurrentStockUI(){  
+    const selected = getSelected();
+    forEach(el => {
+        //Returns UI id
+        if(el.style.backgroundColor === "red"){
+            return el.textContent.trim();
+        }
+    })   
+}
+
+//Get current stocks to be dipslayed on the top in array
+function getCurrentStocks(){
+    const selected = getSelected();
+    const names = [];
+    forEach(el => {
+        //Returns every id except the UI one
+        if(!el.style.backgroundColor === "red" ){
+            names.push(el.textContent.trim());
+        }
+    });
+    return names;
+}
+
+//Update cycle for how fast the nav stocks update
+function updateCycle(){
+
 }
 
 getNavAttributes();
