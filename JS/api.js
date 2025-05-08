@@ -5,6 +5,12 @@ window.stockChartData = {};
 
 //symbol is the current stock selected
 function fetchStockData(symbol) {
+    var validStocks = getValidStocks();
+    validStocks.forEach(el => {
+        if(el.includes(symbol)){
+            return;
+        }
+    });
     fetch(`https://stocknewsfrontend.onrender.com/stocks/${symbol.toUpperCase()}`)
         .then(response => {
             if (!response.ok) throw new Error(`Network response was not ok for ${symbol}`);
@@ -41,7 +47,7 @@ function fetchStockData(symbol) {
         });
 }
 
-//Log IP adresses on the website to the backend 
-function logIPAdress(adress){
+//Does a http request to log/ip to get ip adress
+function getIPAdressInfo(ip){
 
 }

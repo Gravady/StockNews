@@ -1,5 +1,11 @@
 //Get current stock selected from nav.js
 
+//Get valid stocks avaliable that are in the html
+function getValidStocks(){
+    const subStockMenu = document.getElementById("sub_stock_block");
+    return Array.from(subStockMenu.children);
+}
+
 var stock = getCurrentStockUI();
 
 function getSettingAttribute(name){
@@ -32,4 +38,14 @@ function generateStock(){
     stocks.forEach(el => {
         var trim_el = trimString(el);
     });
+}
+
+//Get an arrray of relevant information for block structure
+function getBlockStock(stock){
+    var raw_json = fetchStockData(stock);
+}
+
+//Get back relevant data in array for stock UI
+function getUIStock(stock){
+    var raw_json = fetchStockData(stock);
 }
