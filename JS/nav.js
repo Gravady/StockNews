@@ -38,7 +38,7 @@ function removeSelected(id) {
 function toggleSelection(el) {
     const id = el.id;
     const selected = getSelected();
-
+    console.log("Selected" + el);
     if (!selected.includes(id)) {
         addSelected(id);
         el.style.backgroundColor = "gray";
@@ -63,7 +63,6 @@ function toggleUISelection(el){
     //Make the selected stock UI red instead of gray since only one can be selected at a time
     el.style.backgroundColor = "red";
     el.style.fontWeight = "bold";
-
 }
 
 // Handle stocks with a limit, only one stock selected at a time
@@ -76,6 +75,9 @@ document.querySelectorAll(".stock").forEach((el, index) => {
                 return;
             }
             toggleSelection(el);
+        });
+        el.addEventListener("dblclick", (event) => {
+            toggleUISelection(el);
         });
     }
 });
@@ -141,7 +143,7 @@ function getSettingIndex() {
 //Get current stock that is selected to be displayed in UI
 function getCurrentStockUI(){  
     const selected = getSelected();
-    forEach(el => {
+    selected.forEach(el => {
         //Returns UI id
         if(el.style.backgroundColor === "red"){
             return el.textContent.trim();
@@ -153,7 +155,7 @@ function getCurrentStockUI(){
 function getCurrentStocks(){
     const selected = getSelected();
     const names = [];
-    forEach(el => {
+    selected.forEach(el => {
         //Returns every id except the UI one
         if(!el.style.backgroundColor === "red" ){
             names.push(el.textContent.trim());

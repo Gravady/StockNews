@@ -10,77 +10,79 @@ const port = 3000;
 
 app.use(cors());
 
-// Cache object keyed by stock symbol
-const cache = {};
-const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
-const ALLOWED_STOCKS =
-[
-"AAPL", "NVDA",
-"INTC", "NET",
-"TTWO", "BYD",
-"GOOGL", "TSLA",
-"AYRO", "BTC"
-]; //Get more stocks
+// Allowed symbols
+const ALLOWED_STOCKS = [
+  "AAPL", "NVDA",
+  "INTC", "NET",
+  "TTWO", "BYD",
+  "GOOGL", "TSLA",
+  "AYRO", "BTC"
+];
 
-// Function to fetch and cache data for a specific stock
+// In-memory cache
+const cache = {};
+const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
+
+// Fetch from AlphaVantage API
 async function fetchData(stockName) {
+  const apiKey = process.env.API_KEY;
+  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockName}&apikey=${apiKey}`;
+
   try {
-    const response = await fetch(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockName}&apikey=${process.env.API_KEY}`
-    );
+    const response = await fetch(url);
     const data = await response.json();
+
+    // Handle API error messages
+    if (data["Error Message"] || data["Note"]) {
+      throw new Error("Invalid response from Alpha Vantage API");
+    }
 
     // Store in cache
     cache[stockName] = {
       data,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     };
 
     return data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error(`Alpha Vantage fetch failed for ${stockName}:`, error.message);
     throw error;
   }
 }
 
-// Middleware to handle caching per stock
-async function stockEndpoint(req, res) {
+// GET /stocks/:name endpoint
+app.get('/stocks/:name', async (req, res) => {
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   console.log(`Client IP: ${ip}`);
 
-  const stockName = req.params.name.toUpperCase(); // Normalize the name
+  const stockName = req.params.name.toUpperCase();
 
   if (!ALLOWED_STOCKS.includes(stockName)) {
-    res.status(403).json({error: 'Stock is not allowed. Your IP has been tracked.'});
+    return res.status(403).json({ error: 'Stock is not allowed. Your IP has been tracked.' });
   }
 
   const now = Date.now();
+  const cached = cache[stockName];
 
-  const cachedEntry = cache[stockName];
-
-  if (cachedEntry && (now - cachedEntry.timestamp) < CACHE_DURATION) {
-    // Return cached data
-    return res.json(cachedEntry.data);
+  // Serve cached data if still valid
+  if (cached && (now - cached.timestamp < CACHE_DURATION)) {
+    return res.json(cached.data);
   }
 
-  // Fetch and cache new data
   try {
     const freshData = await fetchData(stockName);
-    res.json(freshData);
-  } catch {
-    res.status(500).json({ error: 'Failed to fetch data. Your IP has been tracked.' });
+    return res.json(freshData);
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to fetch data. Your IP has been tracked.' });
   }
-}
+});
 
-async function allowedStocksEndpoint(req, res) {
-  res.status(200);
-  return res.json(ALLOWED_STOCKS);
-}
+// GET /allowedStocks endpoint
+app.get('/allowedStocks', (req, res) => {
+  res.status(200).json(ALLOWED_STOCKS);
+});
 
-// Endpoint to get stock data
-app.get('/stocks/:name', stockEndpoint);
-app.get('/allowedStocks', allowedStocksEndpoint);
-
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

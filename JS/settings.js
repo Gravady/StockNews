@@ -1,3 +1,5 @@
+console.log("Settings is working");
+
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
 
 //Get setting attribute name

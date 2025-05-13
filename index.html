@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <!--Security-->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src
-     'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://stocknewsbackend.onrender.com;">
+
 
     <!--SEO-->
     <title>Titel Placeholder</title>
@@ -94,7 +95,6 @@
                 </div>
             </div>
             
-            <!--FIx this later to be cool-->
             <div class="general_wrapper">
                 <div id="nav_settings" title="Settings button" class="nav_button">Settings</div>
                 <div id="sub_setting_menu">
@@ -173,7 +173,9 @@
        <img src="../Images/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"></img>
        <div id="full_stock_wrapper">
             <div id="stock_map_wrapper">
-                    <div id="stock_map_ui" title="Graphical chart of a certain stock">Graphical display</div>
+                    <div id="stock_map_ui" title="Graphical chart of a certain stock">
+                        <canvas id="stock_canvas">Canvas test</canvas>
+                    </div>
                     <div id="stock_map_settings" title="Graphical chart configuration settings"></div>
                 <div id="media_items">
                     <!--Media placeholder should be changed in javascript-->
@@ -210,5 +212,7 @@
     <script src="JS/socials.js"></script>
     <script src="JS/chart.js"></script>
     <script src="JS/sound.js"></script>
+    <script src="JS/block.js"></script>
+    <script src="Js/api.js"></script>
 </body>
 </html>
