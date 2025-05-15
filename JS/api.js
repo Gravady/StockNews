@@ -11,6 +11,7 @@ function getJsonUIStock(){
 
 //symbol is the current stock selected and apply the stock to the id
 function applyStockData(symbol, stock_block_id) {
+    console.log("Applying stock data for symbol:", symbol);
     fetch(`https://stocknewsbackend.onrender.com/stocks/${symbol.toUpperCase()}`)
         .then(response => {
             if (!response.ok) throw new Error(`Network response was not ok for ${symbol}`);
@@ -25,7 +26,7 @@ function applyStockData(symbol, stock_block_id) {
             // Store parsed data under window.stockChartData[symbol]
             window.stockChartData[symbol] = {
                 labels: sortedDates,
-                prices: sortedDates.map(date => parseFloat(timeSeries[date]["4. close"]))
+                prices: sortedDates.map(date => parseFloat(timeSeries[date]["3. low"]))
             };
 
             // Update UI block if exists
@@ -47,9 +48,9 @@ function applyStockData(symbol, stock_block_id) {
                 detail: { symbol }
             }));
         })
-        //.catch(error => {
-            //console.error(`Failed to fetch data for ${symbol}:`, error);
-        //});
+        .catch(error => {
+            console.error(`Failed to fetch data for ${symbol}:`, error);
+        });
 }
 
 //Does a http request to log/ip to get ip adress
@@ -57,5 +58,6 @@ function getIPAdressInfo(ip){
 
 }
 
-//Test 
 applyStockData("AAPL", "stock_block_1_1");
+applyStockData("NVDA", "stock_block_1_2");
+applyStockData("GOOGL", "stock_block_1_3");

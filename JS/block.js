@@ -1,6 +1,3 @@
-
-const stock_block_template = "stock_block"; //The default string representing the value, stock_block_1_2 for example, lim=3x3
-
 console.log("Block is working");
 
 //Default array of valid arrays, length=9
@@ -23,9 +20,11 @@ function getRandomStock(){
 }
 
 function spawnStocks(){
+    console.log("Spawning stocks");
     var used_stocks = []; 
     var stock_block_template = "stock_block";
-    var selected_stocks = getCurrentStocks(); //stock.js
+    var selected_stocks = getCurrentStocks(); //nav.js
+    console.log("Selected stocks:" + selected_stocks);
     if(selected_stocks.length =! 9 && selected_stocks.length < 9){
         for(selected_stocks.length; selected_stocks.length < 9; selected_stocks.push(getRandomStock()));
     }
@@ -47,6 +46,21 @@ function spawnStocks(){
         }
     });
 }   
+
+//Logs the valid stock blocks to default to in localhost
+function logValidStockBlocks(arr_block){
+
+}
+
+//Return array with valid stock blocks from localhost
+function getValidStockBlocks(){
+
+}
+
+//Conditional to check if item exists in known valid stock blocks
+function inValidStockBlocks(){
+
+}
 
 //ms
 const updateInterval = 30 * 60 * 60 * 60;

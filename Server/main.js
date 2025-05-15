@@ -86,3 +86,32 @@ app.get('/allowedStocks', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+//ChatGPT
+app.get('/stocks', async (req, res) => {
+  const now = Date.now();
+
+  const fetchTasks = ALLOWED_STOCKS.map(async stock => {
+    try {
+      const cached = cache[stock];
+      if (cached && (now - cached.timestamp < CACHE_DURATION)) {
+        return [stock, cached.data];
+      } else {
+        const freshData = await fetchData(stock);
+        return [stock, freshData];
+      }
+    } catch (err) {
+      return [stock, { error: 'Failed to fetch data' }];
+    }
+  });
+
+  const entries = await Promise.all(fetchTasks);
+  const result = Object.fromEntries(entries);
+
+  res.json(result);
+});
+
+// GET /allowedStocks endpoint
+app.get('/allowedStocks', (req, res) => {
+  res.status(200).json(ALLOWED_STOCKS);
+});

@@ -4,6 +4,7 @@
 }
 
 body, html {
+    background-color: #FAF0E6;
     width: 100%;
     height:auto;
 }
@@ -13,7 +14,7 @@ body, html {
 /*Warning window that pops up when a setting or stock is wrongfully configurec*/
 #warning_window {
     display: grid;
-    background-color: red;
+    background-color: #810020;
     z-index: 2;
     width: 100%;
     height: 15%;
@@ -60,13 +61,13 @@ body, html {
     border-radius: 5px;
     cursor: pointer;
     background-color: white;
-    color: red;
+    color: #C9E4CA;
     transition: background-color 0.2s, color 0.2s;
 }
 
 #buttons button:hover{
     transform: scale(1.05);
-    background-color: red;
+    background-color: #C9E4CA;
     color: white;
 }
 
@@ -85,7 +86,7 @@ nav{
     width: 100%;
     min-height: 60px;
     display: grid;
-    background-color: aqua;
+    background-color: #C0D6DF;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
@@ -110,7 +111,7 @@ nav{
     flex: 1 1 auto;
     min-width:0;
 
-    background-color: red;
+    background-color: #4F6D7A;
     font-size: 1.5em;
     color: white;
     text-decoration: none;
@@ -145,7 +146,7 @@ nav{
     all: inherit;
     display: none;
     position: absolute;
-    background-color: red;
+    background-color: #4F6D7A;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     flex-direction: column;
@@ -178,7 +179,7 @@ nav{
     all: inherit;
     display: none;
     position: absolute;
-    background-color: red;
+    background-color: #4F6D7A;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     flex-direction: column;
@@ -225,19 +226,19 @@ nav{
     font-size: 1.2em;
     flex-direction: row;
     align-items:center;
-    background-color: cyan;
+    background-color: #C0D6DF;
     padding: 10px;
 }
 
 .stock_block h3 {
-    color: blue;
+    color: #4A6FA5;
 }
 
 .stock_block span {
     width: 80%;
     margin-left: 20px;
     margin-right: 10px;
-    background-color: red;
+    background-color: #DBE9EE;
 }
 
 img{
@@ -254,7 +255,6 @@ img{
 
 #stock_map_wrapper{
     display:flex;
-    background-color: lime;
     height: 97vh;
     margin-right: 30px;
     margin-left: 30px;
@@ -278,7 +278,7 @@ img{
 
 .media{
     display:flex;
-    background-color: red;
+    background-color: #8CA4AE;
     flex-direction:column;
     width: 100%;
     height: 25%;
@@ -298,14 +298,13 @@ img{
 }
 
 .social_media_title_class {
-    background-color:purple;
     width:60%;
     height: 20%;
     font-size: 1.5em;
 }
 
 .social_media_text_class {
-   background-color:bisque;
+   background-color:#7A9DAF;
    margin-top:5px;
    height:70%;
    border-radius:5px;
@@ -313,12 +312,12 @@ img{
 
 .social_media_post_eval_class {
     margin-top:5px;
-    color:gray;
+    color:#DBE9EE;
 }
 
 footer{
     margin-top: 20px;
-    background-color:gray;
+    background-color:#DBE9EE;
     width: 100%;
     height: auto;
     display:flex;
