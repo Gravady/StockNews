@@ -13,6 +13,8 @@ const stock_array = [
     "TSLA"
 ];
 
+//Test
+
 //Gets random stock from stock array
 function getRandomStock(){
     var random_number = Math.floor(Math.random() * 10);
