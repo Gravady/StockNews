@@ -1,5 +1,3 @@
-//nav.js
-
 console.log("Nav is working");
 
 // May be changed
@@ -23,11 +21,10 @@ function getSelected() {
 function getSelectedUI(){
     const selected = localStorage.getItem("SelectedUI");
     if (!selected) {
-        localStorage.setItem("SelectedUI", JSON.stringify([])); // changed null to []
+        localStorage.setItem("SelectedUI", JSON.stringify([]));
         return [];
     }
-    return JSON.parse(selected);
-}
+    return JSON.parse(selected);}
 
 function addSelected(id) {
     const selected = getSelected();
@@ -37,8 +34,12 @@ function addSelected(id) {
     }
 }
 
-function setUISelected(id) {
-    localStorage.setItem("SelectedUI", JSON.stringify([id])); // changed from just id to [id]
+function addUISelected(id){
+    const selected = getSelectedUI();
+    if (!selected.includes(id)) {
+        selected.push(id);
+        localStorage.setItem("SelectedUI", JSON.stringify(selected));
+    }
 }
 
 function removeSelected(id) {
@@ -50,25 +51,19 @@ function removeSelected(id) {
     }
 }
 
-function clearUISelection() {
-    const selectedUI = getSelectedUI();
-    if (selectedUI.length > 0) {
-        selectedUI.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.style.backgroundColor = "transparent";
-                el.style.fontWeight = "normal";
-            }
-        });
-        localStorage.setItem("SelectedUI", JSON.stringify([])); // changed null to []
+function removeUISelected(id){
+    const selected = getSelectedUI();
+    const index = selected.indexOf(id);
+    if (index !== -1) {
+        selected.splice(index, 1);
+        localStorage.setItem("SelectedUI", JSON.stringify(selected));
     }
 }
 
-//Toggle gray selection
 function toggleSelection(el) {
     const id = el.id;
     const selected = getSelected();
-    console.log("Selected " + id);
+    console.log("Selected" + el);
     if (!selected.includes(id)) {
         addSelected(id);
         el.style.backgroundColor = "gray";
@@ -80,20 +75,19 @@ function toggleSelection(el) {
     }
 }
 
-// Toggle selection of the stock to be displayed in UI
+//Toggle selection of the stock to be displayed in UI
 function toggleUISelection(el){
     const id = el.id;
-    const selectedUI = getSelectedUI();
-
-    if (selectedUI.length > 0 && selectedUI[0] === id) {
-        clearUISelection();
+    const selected = getSelectedUI();
+    if (!selected.includes(id) && selected.length >= stock_option_ui_limit) {
+        el.style.backgroundColor = "transparent";
+        el.style.fontWeight = "normal";
+        console.log("Only one stock can be selected at a time!");
         return;
     }
-
-    clearUISelection(); 
+    //Make the selected stock UI red instead of gray since only one can be selected at a time
     el.style.backgroundColor = "red";
     el.style.fontWeight = "bold";
-    setUISelected(id);
 }
 
 // Handle stocks with a limit, only one stock selected at a time
@@ -130,15 +124,6 @@ function loadSelectedItems() {
             el.style.fontWeight = "bold";
         }
     });
-
-    const selectedUI = getSelectedUI();
-    if (selectedUI.length > 0) {
-        const el = document.getElementById(selectedUI[0]);
-        if (el) {
-            el.style.backgroundColor = "red";
-            el.style.fontWeight = "bold";
-        }
-    }
 }
 
 // Clear selected items visually (optional, you may call this when needed)
@@ -154,7 +139,14 @@ function removeSelectedItems() {
 }
 
 function removeSelectedUI(){
-    clearUISelection(); // Use new method
+    const ids = getSelectedUI();
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.backgroundColor = "transparent";
+            el.style.fontWeight = "normal";
+        }
+    });
 }
 
 // Handle Ctrl+C to clear selected (unfinished)
@@ -162,7 +154,6 @@ document.addEventListener('keydown', function(event) {
     console.log('Key pressed: ' + event.key);
     if (event.ctrlKey && event.key === 'c') {
         localStorage.setItem("Selected", JSON.stringify([]));
-        localStorage.setItem("SelectedUI", JSON.stringify([]));
         document.querySelectorAll(".stock, .setting").forEach(el => {
             el.style.backgroundColor = "transparent";
             el.style.fontWeight = "normal";
@@ -171,7 +162,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-//Get the stock names from selected elements
+//Get the stock that is being selected from the element
 function getSettingIndex() {
     const selected = getSelected();
     const names = [];
@@ -185,28 +176,25 @@ function getSettingIndex() {
     return names;
 }
 
+
 function getCurrentStockUI(){  
-    const selectedUI = getSelectedUI();
-    if (selectedUI.length > 0) {
-        const el = document.getElementById(selectedUI[0]);
-        if (el) {
+    const selected = getSelected();
+    selected.forEach(el => {
+        //Returns UI id
+        if(el.style.backgroundColor === "red"){
             return el.textContent.trim();
         }
-    }
-    return null;
+    })   
 }
 
+//Get current stocks to be dipslayed on the top in array
 function getCurrentStocks(){
-    const selected = getSelected();
-    const redSelected = getSelectedUI()[0]; 
+    let selected = getSelected();
     const names = [];
-
     selected.forEach(id => {
-        if (id !== redSelected) {
-            const el = document.getElementById(id);
-            if (el) {
-                names.push(el.textContent.trim());
-            }
+        const el = document.getElementById(id);
+        if(el && el.style.backgroundColor !== "red"){
+            names.push(el.textContent.trim());
         }
     });
     return names;

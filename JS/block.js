@@ -29,16 +29,6 @@ function spawnStocks(){
     let selected_stocks = getCurrentStocks(); //nav.js
     console.log("Selected stocks:" + selected_stocks);
 
-    while (selected_stocks.length < 9) {
-        const stock = getRandomStock();
-        if (!selected_stocks.includes(stock)) {
-            selected_stocks.push(stock);
-        }
-    }
-
-    while (selected_stocks.length > 9) {
-        selected_stocks.pop();
-    }
 
     const stock_blocks = document.getElementsByClassName("stock_blocks");
     const index_stock_blocks = document.getElementsByClassName("stock_block");
@@ -57,22 +47,6 @@ function spawnStocks(){
     });
 }   
 
-//Logs the valid stock blocks to default to in localhost
-function logValidStockBlocks(arr_block){
-
-}
-
-//Return array with valid stock blocks from localhost
-function getValidStockBlocks(){
-
-}
-
-//Conditional to check if item exists in known valid stock blocks
-function inValidStockBlocks(){
-
-}
-
-//ms
 const updateInterval = 30 * 60 * 60 * 60;
 function updateStocks(){
 
