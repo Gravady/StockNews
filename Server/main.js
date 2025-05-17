@@ -13,6 +13,14 @@ app.use(cors());
 const CACHE_DURATION = 6 * 60 * 60 * 1000;
 const cache = {};
 
+ALLOWED_STOCKS = [
+  "AAPL", "NVDA",
+  "INTC", "NET",
+  "TTWO", "BYD",
+  "GOOGL", "TSLA",
+  "AYRO", "BTC"
+];
+
 async function fetchData(stockName) {
   const apiKey = process.env.API_KEY;
   const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockName}&apikey=${apiKey}`;
