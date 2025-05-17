@@ -50,15 +50,14 @@ function removeSelected(id) {
         localStorage.setItem("Selected", JSON.stringify(selected));
     }
 }
-
-function removeUISelected(id){
+ function removeUISelected(id){
     const selected = getSelectedUI();
     const index = selected.indexOf(id);
     if (index !== -1) {
         selected.splice(index, 1);
         localStorage.setItem("SelectedUI", JSON.stringify(selected));
     }
-}
+ }
 
 function toggleSelection(el) {
     const id = el.id;
@@ -76,19 +75,29 @@ function toggleSelection(el) {
 }
 
 //Toggle selection of the stock to be displayed in UI
-function toggleUISelection(el){
+function toggleUISelection(el) {
     const id = el.id;
     const selected = getSelectedUI();
-    if (!selected.includes(id) && selected.length >= stock_option_ui_limit) {
+
+    if (selected.includes(id)) {
+        removeUISelected(id);
         el.style.backgroundColor = "transparent";
         el.style.fontWeight = "normal";
-        console.log("Only one stock can be selected at a time!");
         return;
     }
-    //Make the selected stock UI red instead of gray since only one can be selected at a time
+
+    document.querySelectorAll(".stock").forEach(stockEl => {
+        stockEl.style.backgroundColor = "transparent";
+        stockEl.style.fontWeight = "normal";
+    });
+    localStorage.setItem("SelectedUI", JSON.stringify([id]));
+
+    // Mark the clicked element
     el.style.backgroundColor = "red";
     el.style.fontWeight = "bold";
 }
+
+
 
 // Handle stocks with a limit, only one stock selected at a time
 document.querySelectorAll(".stock").forEach((el, index) => {
@@ -117,11 +126,16 @@ document.querySelectorAll(".setting").forEach(el => {
 // Load selected items visually
 function loadSelectedItems() {
     const ids = getSelected();
+    console.log("Loading selected items:", ids);
+
     ids.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
+            console.log("Styling element:", id, el);
             el.style.backgroundColor = "gray";
             el.style.fontWeight = "bold";
+        } else {
+            console.warn("Element not found for id:", id);
         }
     });
 }
@@ -177,27 +191,33 @@ function getSettingIndex() {
 }
 
 
-function getCurrentStockUI(){  
+//Fix this function, the id css should have red
+function getCurrentStockUI() {
     const selected = getSelected();
-    selected.forEach(el => {
-        //Returns UI id
-        if(el.style.backgroundColor === "red"){
-            return el.textContent.trim();
-        }
-    })   
-}
+    const uiStocks = [];
 
-//Get current stocks to be dipslayed on the top in array
-function getCurrentStocks(){
-    let selected = getSelected();
-    const names = [];
     selected.forEach(id => {
         const el = document.getElementById(id);
-        if(el && el.style.backgroundColor !== "red"){
-            names.push(el.textContent.trim());
+        if (el && el.style.backgroundColor === "red") {
+            uiStocks.push(el.textContent.trim());
         }
     });
-    return names;
+
+    return uiStocks;
+}
+
+function getCurrentStocks() {
+    const selectedIds = getSelected();
+    const stockNames = [];
+
+    selectedIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element && element.style.backgroundColor !== "red") {
+            stockNames.push(element.textContent.trim());
+
+        }
+    });
+    return stockNames;
 }
 
 //Update cycle for how fast the nav stocks update
