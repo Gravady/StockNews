@@ -13,7 +13,8 @@ app.use(cors());
 const CACHE_DURATION = 6 * 60 * 60 * 1000;
 const cache = {};
 
-ALLOWED_STOCKS = [
+//using const
+const ALLOWED_STOCKS = [
   "AAPL", "NVDA",
   "INTC", "NET",
   "TTWO", "BYD",
@@ -65,14 +66,6 @@ setInterval(refreshAllStocks, CACHE_DURATION);
 
 app.use(cors());
 
-// Allowed symbols
-const ALLOWED_STOCKS = [
-  "AAPL", "NVDA",
-  "INTC", "NET",
-  "TTWO", "BYD",
-  "GOOGL", "TSLA",
-  "AYRO", "BTC"
-];
 
 app.get('/stocks', (req, res) => {
   const result = {};
