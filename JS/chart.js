@@ -1,3 +1,5 @@
+//chart.js
+
 var chart_selected = getCurrentStockUI(); //nav.js
 let ctx = document.getElementById("stock_canvas");
 const chartParent = document.getElementById("stock_map_wrapper");
@@ -8,32 +10,15 @@ async function registerChartSettings(){
     
 }
 
-//Range is last 7 days
-const date_range = 7;
-//Create map for month to nummerical date
-const month_to_date = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12};
-function getCurrentDate(chart_date){
-    const date = new Date();
-    console.log("Current date:", date);
-    if(chart_date){
-        filtered_date = chart.date.substring(4, 15);
-        month_to_date.forEach(element => {
-            if(element == month_to_date(filtered_date.substring(0, 3))){
-                filtered_date.replace(element, month_to_date(filtered_date.substring(0, 3)));
-            }
-        });
-        return filtered_date;
-    }
-    return date.getFullYear();
-}
+function createChart() {
 
-//Source:ChatGPT
-function createChart(stock_id, data) {
+    const stock_ui_id = "stock_map_ui";
+    const stock_settings_id = "stock_map_settings";
+    const selected_stock = getCurrentStockUI(); //nav.js
+    const data = applyStockData(selected_stock, stock_ui_id); //api.js
 
-    //Get the last 7 days of stock data
-    const valid_dates = []; //data with date in range
-
-    const current_date = getCurrentDate();
+    current_date = data["Meta Data"]["3. Last Refreshed"];
+    valid_dates = [];
 
     for(let i = 0; i < current_date.substring(0, 1); i++){
         valid_dates.push(current_date - i + current_date.substring(1, 3));

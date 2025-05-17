@@ -1,3 +1,5 @@
+//settings.js
+
 console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];

@@ -1,3 +1,5 @@
+//nav.js
+
 console.log("Nav is working");
 
 // May be changed
@@ -18,12 +20,25 @@ function getSelected() {
     return JSON.parse(selected);
 }
 
+function getSelectedUI(){
+    const selected = localStorage.getItem("SelectedUI");
+    if (!selected) {
+        localStorage.setItem("SelectedUI", JSON.stringify([])); // changed null to []
+        return [];
+    }
+    return JSON.parse(selected);
+}
+
 function addSelected(id) {
     const selected = getSelected();
     if (!selected.includes(id)) {
         selected.push(id);
         localStorage.setItem("Selected", JSON.stringify(selected));
     }
+}
+
+function setUISelected(id) {
+    localStorage.setItem("SelectedUI", JSON.stringify([id])); // changed from just id to [id]
 }
 
 function removeSelected(id) {
@@ -35,10 +50,25 @@ function removeSelected(id) {
     }
 }
 
+function clearUISelection() {
+    const selectedUI = getSelectedUI();
+    if (selectedUI.length > 0) {
+        selectedUI.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.backgroundColor = "transparent";
+                el.style.fontWeight = "normal";
+            }
+        });
+        localStorage.setItem("SelectedUI", JSON.stringify([])); // changed null to []
+    }
+}
+
+//Toggle gray selection
 function toggleSelection(el) {
     const id = el.id;
     const selected = getSelected();
-    console.log("Selected" + el);
+    console.log("Selected " + id);
     if (!selected.includes(id)) {
         addSelected(id);
         el.style.backgroundColor = "gray";
@@ -50,19 +80,20 @@ function toggleSelection(el) {
     }
 }
 
-//Toggle selection of the stock to be displayed in UI
+// Toggle selection of the stock to be displayed in UI
 function toggleUISelection(el){
     const id = el.id;
-    const selected = getSelected();
-    if (!selected.includes(id) && selected.length >= stock_option_ui_limit) {
-        el.style.backgroundColor = "transparent";
-        el.style.fontWeight = "normal";
-        console.log("Only one stock can be selected at a time!");
+    const selectedUI = getSelectedUI();
+
+    if (selectedUI.length > 0 && selectedUI[0] === id) {
+        clearUISelection();
         return;
     }
-    //Make the selected stock UI red instead of gray since only one can be selected at a time
+
+    clearUISelection(); 
     el.style.backgroundColor = "red";
     el.style.fontWeight = "bold";
+    setUISelected(id);
 }
 
 // Handle stocks with a limit, only one stock selected at a time
@@ -99,6 +130,15 @@ function loadSelectedItems() {
             el.style.fontWeight = "bold";
         }
     });
+
+    const selectedUI = getSelectedUI();
+    if (selectedUI.length > 0) {
+        const el = document.getElementById(selectedUI[0]);
+        if (el) {
+            el.style.backgroundColor = "red";
+            el.style.fontWeight = "bold";
+        }
+    }
 }
 
 // Clear selected items visually (optional, you may call this when needed)
@@ -113,11 +153,16 @@ function removeSelectedItems() {
     });
 }
 
+function removeSelectedUI(){
+    clearUISelection(); // Use new method
+}
+
 // Handle Ctrl+C to clear selected (unfinished)
 document.addEventListener('keydown', function(event) {
     console.log('Key pressed: ' + event.key);
     if (event.ctrlKey && event.key === 'c') {
         localStorage.setItem("Selected", JSON.stringify([]));
+        localStorage.setItem("SelectedUI", JSON.stringify([]));
         document.querySelectorAll(".stock, .setting").forEach(el => {
             el.style.backgroundColor = "transparent";
             el.style.fontWeight = "normal";
@@ -126,7 +171,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-//Get the stock that is being selected from the element
+//Get the stock names from selected elements
 function getSettingIndex() {
     const selected = getSelected();
     const names = [];
@@ -140,25 +185,28 @@ function getSettingIndex() {
     return names;
 }
 
-//Get current stock that is selected to be displayed in UI
 function getCurrentStockUI(){  
-    const selected = getSelected();
-    selected.forEach(el => {
-        //Returns UI id
-        if(el.style.backgroundColor === "red"){
+    const selectedUI = getSelectedUI();
+    if (selectedUI.length > 0) {
+        const el = document.getElementById(selectedUI[0]);
+        if (el) {
             return el.textContent.trim();
         }
-    })   
+    }
+    return null;
 }
 
-//Get current stocks to be dipslayed on the top in array
 function getCurrentStocks(){
     const selected = getSelected();
+    const redSelected = getSelectedUI()[0]; 
     const names = [];
-    selected.forEach(el => {
-        //Returns every id except the UI one
-        if(!el.style.backgroundColor === "red" ){
-            names.push(el.textContent.trim());
+
+    selected.forEach(id => {
+        if (id !== redSelected) {
+            const el = document.getElementById(id);
+            if (el) {
+                names.push(el.textContent.trim());
+            }
         }
     });
     return names;
@@ -171,3 +219,4 @@ function updateCycle(){
 
 getNavAttributes();
 loadSelectedItems();
+updateCycle(); //Test update cycle

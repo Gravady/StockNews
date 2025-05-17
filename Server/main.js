@@ -10,20 +10,9 @@ const port = 3000;
 
 app.use(cors());
 
-// Allowed symbols
-const ALLOWED_STOCKS = [
-  "AAPL", "NVDA",
-  "INTC", "NET",
-  "TTWO", "BYD",
-  "GOOGL", "TSLA",
-  "AYRO", "BTC"
-];
-
-// In-memory cache
+const CACHE_DURATION = 6 * 60 * 60 * 1000;
 const cache = {};
-const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
 
-// Fetch from AlphaVantage API
 async function fetchData(stockName) {
   const apiKey = process.env.API_KEY;
   const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockName}&apikey=${apiKey}`;
@@ -50,6 +39,42 @@ async function fetchData(stockName) {
   }
 }
 
+
+async function refreshAllStocks() {
+  for (const stock of ALLOWED_STOCKS) {
+    try {
+      await fetchData(stock);
+    } catch (error) {
+      console.error(`Failed to refresh ${stock}:`, error.message);
+    }
+  }
+}
+
+//Refresh stocks
+refreshAllStocks();
+
+setInterval(refreshAllStocks, CACHE_DURATION);
+
+app.use(cors());
+
+// Allowed symbols
+const ALLOWED_STOCKS = [
+  "AAPL", "NVDA",
+  "INTC", "NET",
+  "TTWO", "BYD",
+  "GOOGL", "TSLA",
+  "AYRO", "BTC"
+];
+
+app.get('/stocks', (req, res) => {
+  const result = {};
+  for (const stock of ALLOWED_STOCKS) {
+    const cached = cache[stock];
+    result[stock] = cached?.data || { error: 'Data unavailable' };
+  }
+  res.json(result);
+});
+
 // GET /stocks/:name endpoint
 app.get('/stocks/:name', async (req, res) => {
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
@@ -69,12 +94,7 @@ app.get('/stocks/:name', async (req, res) => {
     return res.json(cached.data);
   }
 
-  try {
-    const freshData = await fetchData(stockName);
-    return res.json(freshData);
-  } catch (err) {
-    return res.status(500).json({ error: 'Failed to fetch data. Your IP has been tracked.' });
-  }
+  return res.status(503).json({ error: 'Data unavailable. Please try again later.' });
 });
 
 // GET /allowedStocks endpoint
@@ -85,33 +105,4 @@ app.get('/allowedStocks', (req, res) => {
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
-});
-
-//ChatGPT
-app.get('/stocks', async (req, res) => {
-  const now = Date.now();
-
-  const fetchTasks = ALLOWED_STOCKS.map(async stock => {
-    try {
-      const cached = cache[stock];
-      if (cached && (now - cached.timestamp < CACHE_DURATION)) {
-        return [stock, cached.data];
-      } else {
-        const freshData = await fetchData(stock);
-        return [stock, freshData];
-      }
-    } catch (err) {
-      return [stock, { error: 'Failed to fetch data' }];
-    }
-  });
-
-  const entries = await Promise.all(fetchTasks);
-  const result = Object.fromEntries(entries);
-
-  res.json(result);
-});
-
-// GET /allowedStocks endpoint
-app.get('/allowedStocks', (req, res) => {
-  res.status(200).json(ALLOWED_STOCKS);
 });
