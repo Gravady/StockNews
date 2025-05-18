@@ -10,43 +10,82 @@ function getJsonUIStock(){
 }
 
 //symbol is the current stock selected and apply the stock to the id
+//stock_block_id = id of current element
 function applyStockData(symbol, stock_block_id) {
-    //Call only once per day
-    if(dayPassed()){ //time.js
+    console.log("Applying stock data for symbol:", symbol);
+    console.log("stock_block_id:", stock_block_id);
+
+    const stockBlock = document.getElementById(stock_block_id); //stock_block_id;
+    console.log("stockBlock:", stockBlock);
+
+    const h3Element = stockBlock.querySelector('h3');
+    console.log("h3Element:", h3Element);
+
+    const spanElement = stockBlock.querySelector('span');
+    console.log("spanElement:", spanElement);
+
+
+    const daypassed = dayPassed(); //time.js
+    if(daypassed) {
         console.log("Day passed:" + dayPassed());
         console.log("Applying stock data for symbol:", symbol);
+
         fetch(`https://stocknewsbackend.onrender.com/stocks/${symbol.toUpperCase()}`)
             .then(response => {
                 if (!response.ok) throw new Error(`Network response was not ok for ${symbol}`);
                 return response.json();
             })
             .then(data => {
-                console.log("Fetching data from API");
-                console.log(data);
-                const timeSeries = data["Time Series (Daily)"];
-                const sortedDates = Object.keys(timeSeries).sort();
+                //if element being parsed is for the ui
+                if(stockBlock.backgroundColor == "red"){
+                    return data;
+                } 
 
-                // Store parsed data under window.stockChartData[symbol]
+                //if element being parsed is for the api
+                console.log("Fetching data from API for:", symbol);
+                console.log(data);
+
+                if (data.Information && data.Information.includes("premium endpoint")) {
+                    stockBlock.querySelector('h3').textContent = symbol.toUpperCase(); 
+                    stockBlock.querySelector('span').textContent = "API call was invalid (premium required)";
+                }
+
+                const timeSeries = data["Time Series (Daily)"];
+
+                if (!timeSeries || Object.keys(timeSeries).length === 0) {
+                    stockBlock.querySelector('span').textContent = "API call failed (empty data)";
+                    return;
+                }
+
+                const sortedDates = Object.keys(timeSeries).sort();
+                const prices = sortedDates.map(date => parseFloat(timeSeries[date]["3. low"])).filter(p => !isNaN(p));
+
+                if (prices.length === 0) {
+                    stockBlock.querySelector('span').textContent = "API call failed (no valid prices)";
+                    return;
+                }
+
+                // Store parsed data
                 window.stockChartData[symbol] = {
                     labels: sortedDates,
-                    prices: sortedDates.map(date => parseFloat(timeSeries[date]["3. low"]))
+                    prices: prices
                 };
 
-                // Update UI block if exists
                 const latestDate = sortedDates[sortedDates.length - 1];
                 const latestData = timeSeries[latestDate];
-                const stockBlock = document.getElementById(stock_block_id);
-                
-                stockBlock.querySelector('h3').textContent = symbol.toUpperCase();
-                    stockBlock.querySelector('span').textContent = `Close: $${latestData["4. close"]}`;
+                stockBlock.querySelector('span').textContent = `Close: $${latestData["4. close"]}`;
 
-                // Dispatch a custom event that includes the stock symbol
+                // Notify listeners
                 document.dispatchEvent(new CustomEvent('stockDataReady', {
                     detail: { symbol }
                 }));
             })
             .catch(error => {
-                console.error(`Failed to fetch data for ${symbol}:`, error);
+                console.error("Failed to fetch API data");
+                if(stockBlock){
+                    stockBlock.querySelector('h3').textContent = symbol.toUpperCase(); 
+                    stockBlock.querySelector('span').textContent = "API call failed(" + error.message + ")";
+                }
             });
     }
 }
@@ -55,7 +94,5 @@ function applyStockData(symbol, stock_block_id) {
 function getIPAdressInfo(ip){
 
 }
+//Test
 
-applyStockData("AAPL", "stock_block_1_1");
-applyStockData("NVDA", "stock_block_1_2");
-applyStockData("GOOGL", "stock_block_1_3");

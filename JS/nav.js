@@ -1,8 +1,7 @@
 console.log("Nav is working");
 
-// May be changed
 const stock_option_ui_limit = 1;
-const stock_option_limit = 5;
+const stock_option_limit = 9;
 
 function getNavAttributes() {
     var settings = document.getElementsByClassName("setting"); 
@@ -11,20 +10,24 @@ function getNavAttributes() {
 
 function getSelected() {
     const selected = localStorage.getItem("Selected");
+    console.log("Selected items:" + selected); 
     if (!selected) {
         localStorage.setItem("Selected", JSON.stringify([]));
+        console.log("No items selected");
         return [];
     }
+    console.log("Getting sellected items");
     return JSON.parse(selected);
 }
 
-function getSelectedUI(){
+function getSelectedUI() {
     const selected = localStorage.getItem("SelectedUI");
     if (!selected) {
         localStorage.setItem("SelectedUI", JSON.stringify([]));
         return [];
     }
-    return JSON.parse(selected);}
+    return JSON.parse(selected);
+}
 
 function addSelected(id) {
     const selected = getSelected();
@@ -34,7 +37,7 @@ function addSelected(id) {
     }
 }
 
-function addUISelected(id){
+function addUISelected(id) {
     const selected = getSelectedUI();
     if (!selected.includes(id)) {
         selected.push(id);
@@ -50,14 +53,15 @@ function removeSelected(id) {
         localStorage.setItem("Selected", JSON.stringify(selected));
     }
 }
- function removeUISelected(id){
+
+function removeUISelected(id) {
     const selected = getSelectedUI();
     const index = selected.indexOf(id);
     if (index !== -1) {
         selected.splice(index, 1);
         localStorage.setItem("SelectedUI", JSON.stringify(selected));
     }
- }
+}
 
 function toggleSelection(el) {
     const id = el.id;
@@ -90,25 +94,29 @@ function toggleUISelection(el) {
         stockEl.style.backgroundColor = "transparent";
         stockEl.style.fontWeight = "normal";
     });
+
     localStorage.setItem("SelectedUI", JSON.stringify([id]));
 
-    // Mark the clicked element
     el.style.backgroundColor = "red";
     el.style.fontWeight = "bold";
 }
 
-
-
-// Handle stocks with a limit, only one stock selected at a time
 document.querySelectorAll(".stock").forEach((el, index) => {
     if (index < stock_option_limit) {
         el.addEventListener("click", (event) => {
+            console.log("Clicked");
             const selected = getSelected();
-            if (!selected.includes(el.id) && selected.length >= stock_option_limit) {
+            if (!selected.includes(el.id) && selected.length -3 >= stock_option_limit) {
                 console.log("Stock option limit reached!");
                 return;
             }
             toggleSelection(el);
+            //FIX: Fix this so that it works correctly so that if a seelcted item is clicked again and there is no UI selected
+            const computedStyle = window.getComputedStyle(el);
+            if(computerdStyle.backgroundColor == "gray" && getSelectedUI().length == 0){
+                console.log("Selected UI");
+                toggleUISelection(el);
+            }
         });
         el.addEventListener("dblclick", (event) => {
             toggleUISelection(el);
@@ -123,24 +131,35 @@ document.querySelectorAll(".setting").forEach(el => {
     });
 });
 
-// Load selected items visually
 function loadSelectedItems() {
+    console.log("Loading selected items");
     const ids = getSelected();
+    const uiSelected = getSelectedUI();
+
     console.log("Loading selected items:", ids);
 
     ids.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
-            console.log("Styling element:", id, el);
             el.style.backgroundColor = "gray";
             el.style.fontWeight = "bold";
         } else {
             console.warn("Element not found for id:", id);
         }
     });
+
+    //load UI item in red
+    if(uiSelected){
+        const el = document.getElementById(uiSelected[0]);
+        el.style.backgroundColor = "red";
+        el.style.fontWeight = "bold";
+    }
 }
 
-// Clear selected items visually (optional, you may call this when needed)
+
+
+
+// Clear selected items visually
 function removeSelectedItems() {
     const ids = getSelected();
     ids.forEach(id => {
@@ -152,7 +171,7 @@ function removeSelectedItems() {
     });
 }
 
-function removeSelectedUI(){
+function removeSelectedUI() {
     const ids = getSelectedUI();
     ids.forEach(id => {
         const el = document.getElementById(id);
@@ -163,11 +182,12 @@ function removeSelectedUI(){
     });
 }
 
-// Handle Ctrl+C to clear selected (unfinished)
+// Handle Ctrl+C to clear selected
 document.addEventListener('keydown', function(event) {
     console.log('Key pressed: ' + event.key);
     if (event.ctrlKey && event.key === 'c') {
         localStorage.setItem("Selected", JSON.stringify([]));
+        localStorage.setItem("SelectedUI", JSON.stringify([]));
         document.querySelectorAll(".stock, .setting").forEach(el => {
             el.style.backgroundColor = "transparent";
             el.style.fontWeight = "normal";
@@ -176,7 +196,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-//Get the stock that is being selected from the element
+// Get the text of selected elements
 function getSettingIndex() {
     const selected = getSelected();
     const names = [];
@@ -186,14 +206,12 @@ function getSettingIndex() {
             names.push(el.textContent.trim());
         }
     });
-
     return names;
 }
 
-
-//Fix this function, the id css should have red
+// Get the stock displayed in UI (red)
 function getCurrentStockUI() {
-    const selected = getSelected();
+    const selected = getSelectedUI();
     const uiStocks = [];
 
     selected.forEach(id => {
@@ -206,6 +224,7 @@ function getCurrentStockUI() {
     return uiStocks;
 }
 
+// Get currently selected (non-UI) stocks
 function getCurrentStocks() {
     const selectedIds = getSelected();
     const stockNames = [];
@@ -214,17 +233,16 @@ function getCurrentStocks() {
         const element = document.getElementById(id);
         if (element && element.style.backgroundColor !== "red") {
             stockNames.push(element.textContent.trim());
-
         }
     });
     return stockNames;
 }
 
-//Update cycle for how fast the nav stocks update
-function updateCycle(){
+// Update cycle placeholder
+function updateCycle() {
 
 }
 
 getNavAttributes();
 loadSelectedItems();
-updateCycle(); //Test update cycle
+updateCycle(); 

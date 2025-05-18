@@ -17,10 +17,11 @@ const stock_array = [
 
 //Gets random stock from stock array
 function getRandomStock(){
-    var random_number = Math.floor(Math.random() * 10);
+    var random_number = Math.floor(Math.random() * stock_array.length);
     return stock_array[random_number];
 }
 
+//FIX:spawnStocks logic not working correctly 
 function spawnStocks(){
     console.log("Spawning stocks");
     var used_stocks = []; 
@@ -29,27 +30,30 @@ function spawnStocks(){
     let selected_stocks = getCurrentStocks(); //nav.js
     console.log("Selected stocks:" + selected_stocks);
 
-
     const stock_blocks = document.getElementsByClassName("stock_blocks");
     const index_stock_blocks = document.getElementsByClassName("stock_block");
 
     selected_stocks.forEach(element => { 
-        for(let i=0; i<stock_blocks.length; i++){
-            for(let j=0; j<index_stock_blocks.length; j++){
-                const row_block = `${stock_block_template}_${i}_${j}`;
-                if (!used_stocks.has(symbol)) {
-                    applyStockData(symbol, row_block);
-                    used_stocks.add(symbol);
-                    return; 
+        console.log("Parsing element:" + element);
+        for(let i=1; i<3; i++){
+            for(let j=1; j<3; j++){
+                const row_block = `stock_block_${i}_${j}`;
+                if (!used_stocks.includes(element)) {
+                    applyStockData(element, row_block); //api.js
+                    used_stocks.push(element);
                 }
             }
         }
     });
-}   
+    return;
+}
 
 const updateInterval = 30 * 60 * 60 * 60;
 function updateStocks(){
 
 }
 
-spawnStocks();
+
+document.addEventListener("DOMContentLoaded", () => {
+    spawnStocks();
+});
