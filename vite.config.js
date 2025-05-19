@@ -1,5 +1,13 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/StockNews/'  
-})
+  publicDir: 'Images', 
+
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      input: 'index.html', 
+    },
+  },
+});
