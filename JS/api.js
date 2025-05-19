@@ -96,15 +96,3 @@ function applyStockData(symbol, stock_block_id, is_ui = false){
 function getIPAdressInfo(ip){
 
 }
-//Test, testing works
-document.addEventListener("DOMContentLoaded", () => {
-    applyStockData("AAPL", "stock_block_1_1");
-    applyStockData("MSFT", "stock_block_1_2");
-    applyStockData("NET", "stock_block_1_3");
-    applyStockData("TSLA", "stock_block_2_1");
-    applyStockData("AMZN", "stock_block_2_2");
-    applyStockData("META", "stock_block_2_3");
-    applyStockData("INTC", "stock_block_3_1");
-    applyStockData("GOOGL", "stock_block_3_2");
-    applyStockData("NVDA", "stock_block_3_3");
-});

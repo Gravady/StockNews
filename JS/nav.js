@@ -158,15 +158,12 @@ function loadSelectedItems() {
     });
 
     //load UI item in red
-    if(uiSelected){
+    if(uiSelected && uiSelected.length > 0){
         const el = document.getElementById(uiSelected[0]);
         el.style.backgroundColor = "red";
         el.style.fontWeight = "bold";
     }
 }
-
-
-
 
 // Clear selected items visually
 function removeSelectedItems() {
