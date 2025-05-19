@@ -49,12 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
 	clearChart();
 	createChart({x1: 1, x2: 2, x3: 3, x4: 4, x5: 5, y1: 1, y2: 2, y3: 3, y4: 4, y5: 5}, true, 16);
 })
-
+ 
 function createChart(data, numbers, size){
 	displayNumbers = numbers;
 	if (size + "" != "NaN"){
 		numbersSize = size;
 	}
+  ctx.style.height = chartParent.clientHeight + "px";
+  ctx.style.width = chartParent.clientWidth + "px";
+
 	console.log(numbersSize)
 	chart1 = new Chart(ctx, {
 		type: 'line',
@@ -96,6 +99,5 @@ function createChart(data, numbers, size){
 				}
 			}
 		},
-		height: 400
 	});
 }
