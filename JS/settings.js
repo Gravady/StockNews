@@ -3,37 +3,14 @@ console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
 
-const setting_names = ["Darkmode", "Socials", "Colorblindness", "Language"];
-const setting_id_names = ["Darkmode, Socials, Colorblindness", "Language"];
-
 function isSettingActive(setting){
-    if(setting_id_names.includes(settings)){
-        const selected = getSelected(); //nav.js
-        return selected.includes(setting);
+    const selected = getSelected(); //nav.js
+    const setting_thing = document.getElementById(setting);
+    if(selected.includes(setting_thing)){
+        return true;
     }
     else{
         return false;
-    }
-}
-
-//Apply settings
-function applySettings(){
-    if(isSettingActive("Darkmode")){
-        applyDarkMode();
-    }
-    else{
-        applyLightMode();
-    }
-
-    if(isSettingActive("Socials")){
-        loadSocialMedia();
-    }
-
-    if(isSettingActive("Colorblindness")){
-        applyColorblindness();
-    }
-    if(isSettingActive("Language")){
-        applyLanguage();
     }
 }
 
@@ -65,7 +42,8 @@ function applyDarkMode(){
 }
 
 var is_darkmode = false;
-document.getElementById("Darkmode").addEventListener("click", function(event) {
+document.getElementById("DarkMode").addEventListener("click", function(event) {
+    console.log("Darkmode button pressed");
     if(is_colorblind){
         warning_slider("Colorblindness");
         return;
@@ -78,6 +56,17 @@ document.getElementById("Darkmode").addEventListener("click", function(event) {
         applyLightMode();
     }
 });
+
+//Bad code done quickly 
+const darkMode = document.getElementById("DarkMode");
+if(isSettingActive(darkMode)){
+    is_darkmode = true;
+    applyDarkMode();
+}
+else{
+    is_darkmode = false;
+    applyLightMode();
+}
 
 //-------------------
 
@@ -101,8 +90,6 @@ function applyColorblindness(){
         el.style.border = "1px solid green";
     });
 }
-
-applyColorblindness();
 
 function applyNormal() {
     document.querySelectorAll("*").forEach(el => {
@@ -128,6 +115,17 @@ document.getElementById("Colorblindness").addEventListener("click", function(eve
         applyColorblindness();
     }
 });
+
+//Bad code done quickly 
+const colorblindMode = document.getElementById("Colorblindness");
+if(isSettingActive(colorblindMode)){
+    is_darkmode = true;
+    applyColorblindness();
+}
+else{
+    is_darkmode = false;
+    applyNormal();
+}
 
 //----------------
 
@@ -231,3 +229,13 @@ document.addEventListener("keydown", function(event) {
         warning_slider("Setting limit");
     }
 })
+
+//automatic setting
+function automaticSettings() {
+    if (is_darkmode) {
+        applyDarkMode();
+    }
+    if (is_colorblind) {
+        applyColorblindness();
+    }
+}

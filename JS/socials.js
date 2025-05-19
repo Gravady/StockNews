@@ -9,6 +9,7 @@ function loadSocial(){
     }
     else{
         document.getElementById("media_items").style.display = "flex";
+        document.getElementById("stock_map_ui").style.width = "70%";
     }
 }
 

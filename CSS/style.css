@@ -223,6 +223,11 @@ nav{
     font-family: "normal";
 }
 
+/*REMOVE*/
+#Colorblindness{
+    font: "normal";
+}
+
 #sub_setting_menu {
     all: inherit;
     display: none;
