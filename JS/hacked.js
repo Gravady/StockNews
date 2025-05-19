@@ -42,7 +42,7 @@ function hackerWindow() {
 
     const hackerTitle = document.createElement("h2");
     hackerTitle.id = "hacker_title";
-    hackerTitle.textContent = "Hacker say: You got hacked!";
+    hackerTitle.textContent = "You got hacked!";
 
     const hackerWindow = document.createElement("div");
     hackerWindow.id = "hacker_window";

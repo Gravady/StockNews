@@ -122,10 +122,6 @@ noscript > form:hover {
     color: white;
 }
 
-#warning_window > * {
-
-}
-
 #warning_window > *:hover{
     cursor: pointer;
 }
@@ -214,11 +210,20 @@ nav{
     background-color: blueviolet;
 }
 
-#nav_stocks {
+/*----------------------------------------------------------------------------*/
+.general_wrapper:hover #sub_setting_menu{
+    display:flex;
+}
+
+#nav_settings{
 
 }
 
-#sub_social_menu{
+.setting{
+    font-family: "normal";
+}
+
+#sub_setting_menu {
     all: inherit;
     display: none;
     position: absolute;
@@ -230,20 +235,8 @@ nav{
     left: 0px;
     top: 0px;
 }
-/*----------------------------------------------------------------------------*/
-.general_wrapper:hover #sub_setting_menu{
-    display:flex;
-}
 
-.general_wrapper:hover #sub_social_menu{
-    display:flex;
-}
-
-#nav_settings{
-
-}
-
-#sub_setting_menu {
+#socials_menu{
     all: inherit;
     display: none;
     position: absolute;
