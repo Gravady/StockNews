@@ -1,5 +1,8 @@
 //nav.js
 
+//NOTE: Lite av nav logiken som att välja stocks fungerar inte korrekt
+//orkade inte fixa det eftersom stocksen ändå inte fungerar riktig ;)
+
 console.log("Nav is working");
 
 const stock_option_ui_limit = 1;
