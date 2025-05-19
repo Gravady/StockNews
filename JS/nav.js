@@ -1,3 +1,5 @@
+//nav.js
+
 console.log("Nav is working");
 
 const stock_option_ui_limit = 1;
