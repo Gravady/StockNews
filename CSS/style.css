@@ -336,7 +336,7 @@ img{
 #stock_map_ui{
     background-color: black;
     width: 70%;
-    height: 500px;
+    height: auto;
 }
 
 #media_items{
@@ -433,16 +433,22 @@ footer > * :hover {
 
     #media_items{
         width:auto;
+        height:130%;
+        margin-top:10px;
+        margin-bottom:10px;
     }
 
     .media{
         align-self: center;
-        height: 30%;
+        height: 40%;
+        width: 100%;
+        margin-top:10px;
+        margin-bottom:10px;
     }
 
     .media > * {
-        margin-top:0px;
-        margin-bottom:0px;
+        margin-top:1px;
+        margin-bottom:3px;
         margin-right:10px;
         margin-left: 10px;
     }

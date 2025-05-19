@@ -35,6 +35,9 @@ function addSelected(id) {
         selected.push(id);
         localStorage.setItem("Selected", JSON.stringify(selected));
     }
+    else{
+        return;
+    }
 }
 
 function addUISelected(id) {
@@ -42,6 +45,9 @@ function addUISelected(id) {
     if (!selected.includes(id)) {
         selected.push(id);
         localStorage.setItem("SelectedUI", JSON.stringify(selected));
+    }
+    else {
+        return;
     }
 }
 
@@ -113,11 +119,12 @@ document.querySelectorAll(".stock").forEach((el, index) => {
             toggleSelection(el);
             //FIX: Fix this so that it works correctly so that if a seelcted item is clicked again and there is no UI selected
             const computedStyle = window.getComputedStyle(el);
-            if(computerdStyle.backgroundColor == "gray" && getSelectedUI().length == 0){
+            if(computerdStyle.backgroundColor == "gray" && (getSelectedUI().length == 0 || getSelectedUI == null)){
                 console.log("Selected UI");
                 toggleUISelection(el);
             }
         });
+        
         el.addEventListener("dblclick", (event) => {
             toggleUISelection(el);
         });

@@ -47,7 +47,7 @@ function clearChart(){
 
 document.addEventListener("DOMContentLoaded", () => {
 	clearChart();
-	createChart({x1: 1, x2: 2, x3: 3, x4: 4, x5: 5, y1: 1, y2: 2, y3: 3, y4: 4, y5: 5}, true, 16);
+	createChart({x1: 105, x2: 150, x3: 165, x4: 143, x5: 200, y1: 1, y2: 2, y3: 3, y4: 4, y5: 5}, true, 16);
 })
  
 function createChart(data, numbers, size){
