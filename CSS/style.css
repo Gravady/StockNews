@@ -14,6 +14,16 @@ a{
     text-decoration: none;
 }
 
+h3{
+    font: "normal";
+    font-weight: "normal";
+}
+
+h5{
+    font: "normal";
+    font-weight: "normal";
+}
+
 
 noscript {
     display: flex;
