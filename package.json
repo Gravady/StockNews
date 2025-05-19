@@ -1,5 +1,19 @@
 {
+  "name": "StockNews",
+  "version": "1.0.0",
+  "homepage": "https://gravady.github.io/StockNews",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "chart.js": "^4.4.9"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9",
+    "gh-pages": "^5.0.0"
   }
 }
