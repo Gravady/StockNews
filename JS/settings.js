@@ -42,14 +42,6 @@ function applySettings(){
     }
 }
 
-function applyLightMode(){
-    document.body.style.filter = "invert(0)";
-}
-
-function applyDarkMode(){
-    document.body.style.filter = "invert(1)";
-}
-
 //3 social medias are required
 const socialReq = 3;
 const social_default = ["Twitter", "Reddit", "4Chan"];
@@ -67,6 +59,34 @@ function loadSocialMedia(){
 
     }
 }
+
+//------------------
+//Darkmode
+
+function applyLightMode(){
+    document.body.style.filter = "invert(0)";
+}
+
+function applyDarkMode(){
+    document.body.style.filter = "invert(1)";
+}
+
+var is_darkmode = false;
+document.getElementById("Darkmode").addEventListener("click", function(event) {
+    if(is_colorblind){
+        warning_slider("Colorblindness");
+        return;
+    }
+    is_darkmode = !is_darkmode;
+    if(is_darkmode){
+        applyDarkMode();
+    }
+    else{
+        applyLightMode();
+    }
+});
+
+//-------------------
 
 //--------------------
 
@@ -99,6 +119,10 @@ function applyNormal() {
 //Lazy solution
 var is_colorblind = false;
 document.getElementById("Colorblindness").addEventListener("click", function(event) {  
+    if(is_darkmode){
+        warning_slider("Colorblindness");
+        return;
+    }
     if(is_colorblind){
         is_colorblind = false;
         applyNormal();
@@ -162,7 +186,6 @@ function warning_slider(arg) {
     playSound("pling");
 
     const elem = document.getElementById("warning_window");
-
     switch (arg) {
         case "Setting limit":
             document.getElementById("warning_title").innerHTML = "Setting limit reached!";
@@ -179,6 +202,10 @@ function warning_slider(arg) {
         case "Stock limit":
             document.getElementById("warning_title").innerHTML = "Stock limit reached!";
             document.getElementById("warning_description").innerHTML = "You have reached the maximum amount of stocks you may have.";
+            break;
+        case "Colorblindness":
+            document.getElementById("warning_title").innerHTML = "Colorblindness/DarkMode conflict";
+            document.getElementById("warning_description").innerHTML = "Cant enable DarkMode and Colorblindness at the same time.";
             break;
         default:
             document.getElementById("warning_title").innerHTML = "Unknown warning";
