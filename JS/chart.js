@@ -38,8 +38,6 @@ let numbersSize = 20;
         chartParent.removeChild(ctx);
         ctx = document.createElement('canvas');
         ctx.id = "stock_canvas";
-        ctx.ondrop = dropHandler;
-        ctx.ondragover = dragoverHandler;
         chartParent.appendChild(ctx);
         changeShart();
         console.log("chart cleared");
