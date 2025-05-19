@@ -36,3 +36,9 @@ function dayPassed(){
     }
     return true;
 }
+
+//Timer
+//https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

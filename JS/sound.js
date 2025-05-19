@@ -6,8 +6,7 @@ function loadSounds(){
 
 }
 
-//Pling sound effect
-function plingSound(){
-    const sound = new Audio("Sound/pling.mp3");
+function playSound(sound_name){
+    const sound = new Audio("Sound/" + sound_name + ".mp3");
     sound.play();
 }

@@ -1,86 +1,102 @@
-//chart.js
+/*import { Chart } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineController,
+  LineElement
+} from 'chart.js';
 
-var chart_selected = getCurrentStockUI(); //nav.js
-let ctx = document.getElementById("stock_canvas");
-const chartParent = document.getElementById("stock_map_wrapper");
-let chart = document.getElementById("stock_map_ui");
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineController,
+  LineElement
+);*/
 
-//Register settings about chart that user inputs 
-async function registerChartSettings(){
-    
-}
 
-function createChart() {
+let ctx = document.getElementById('stock_canvas');
+const chartParent = document.getElementById('stock_map_ui');
+let chart1 = undefined;
+let displayNumbers = false;
+let numbersSize = 20;
 
-    const stock_ui_id = "stock_map_ui";
-    const stock_settings_id = "stock_map_settings";
-    const selected_stock = getCurrentStockUI(); //nav.js
-    const data = applyStockData(selected_stock, stock_ui_id); //api.js
+      export function changeShart(){
+        ctx = document.getElementById('stock_canvas');
+      }
+      function clearChart(){
+        chartParent.removeChild(ctx);
+        ctx = document.createElement('canvas');
+        ctx.id = "stock_canvas";
+        ctx.ondrop = dropHandler;
+        ctx.ondragover = dragoverHandler;
+        chartParent.appendChild(ctx);
+        changeShart();
+        console.log("chart cleared");
+      }
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        clearChart();
+        createChart({x1: 1, x2: 2, x3: 3, x4: 4, x5: 5, y1: 1, y2: 2, y3: 3, y4: 4, y5: 5}, true, 16);
+        console.log("chart created");
+      })
 
-    current_date = data["Meta Data"]["3. Last Refreshed"];
-    valid_dates = [];
-
-    for(let i = 0; i < current_date.substring(0, 1); i++){
-        valid_dates.push(current_date - i + current_date.substring(1, 3));
-    }
-
-    console.log(valid_dates);
-
-    //----------------
-
-    const dates = Object.keys(data["Time Series (Daily)"]);    
-
-    const timeSeries = data["Time Series (Daily)"];
-    const sortedDates = Object.keys(timeSeries).sort();
-
-    console.log("Creating chart")
-
-    const closingPrices = dates.map(date => parseFloat(timeSeries[date]["4. close"]));
-
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: dates,
-            datasets: [{
-                label: `${data["Meta Data"]["2. Symbol"]} Closing Price`,
-                data: closingPrices,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                tension: 0.2,
-                pointRadius: 2,
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    ticks: {
-                        maxTicksLimit: 10,
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Price (USD)'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: `Stock Prices for ${data["Meta Data"]["2. Symbol"]}`
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                },
-            },
-            interaction: {
-                mode: 'nearest',
-                axis: 'x',
-                intersect: false
-            }
+      function createChart(data, numbers, size){
+        console.log("Creating chart");
+        displayNumbers = numbers;
+        if (size + "" != "NaN"){
+          numbersSize = size;
         }
-    });
-}
+        console.log(numbersSize)
+        chart1 = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: [data.x1, data.x2, data.x3, data.x4, data.x5],
+            datasets: [{
+              label: 'Share price',
+              data: [data.y1, data.y2, data.y3, data.y4, data.y5],
+              borderWidth: 1,
+              borderColor: 'rgb(0, 255, 38)',
+              backgroundColor: 'rgb(0, 255, 38)',
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  display: displayNumbers,
+                  color: 'white',
+                  font: {
+                    size: numbersSize
+                  },
+                },
+              },
+              y: {
+                beginAtZero: false,
+                ticks: {
+                  display: displayNumbers,
+                  color: 'white',
+                  font: {
+                    size: numbersSize
+                  },
+                },
+              }
+            }
+          }
+        });
+      }

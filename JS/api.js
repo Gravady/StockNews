@@ -11,7 +11,7 @@ function getJsonUIStock(){
 
 //symbol is the current stock selected and apply the stock to the id
 //stock_block_id = id of current element
-function applyStockData(symbol, stock_block_id) {
+function applyStockData(symbol, stock_block_id, is_ui = false){
     console.log("Applying stock data for symbol:", symbol);
     console.log("stock_block_id:", stock_block_id);
 
@@ -37,7 +37,7 @@ function applyStockData(symbol, stock_block_id) {
             })
             .then(data => {
                 //if element being parsed is for the ui
-                if(stockBlock.backgroundColor == "red"){
+                if(is_ui){
                     return data;
                 } 
 
@@ -58,6 +58,7 @@ function applyStockData(symbol, stock_block_id) {
                 }
 
                 const sortedDates = Object.keys(timeSeries).sort();
+                //later log prices and see if price went up or down
                 const prices = sortedDates.map(date => parseFloat(timeSeries[date]["3. low"])).filter(p => !isNaN(p));
 
                 if (prices.length === 0) {
@@ -84,7 +85,8 @@ function applyStockData(symbol, stock_block_id) {
                 console.error("Failed to fetch API data");
                 if(stockBlock){
                     stockBlock.querySelector('h3').textContent = symbol.toUpperCase(); 
-                    stockBlock.querySelector('span').textContent = "API call failed(" + error.message + ")";
+                    stockBlock.querySelector('span').textContent = "API call failed(console log)";
+                    console.log(error.message);
                 }
             });
     }
@@ -94,5 +96,15 @@ function applyStockData(symbol, stock_block_id) {
 function getIPAdressInfo(ip){
 
 }
-//Test
-
+//Test, testing works
+document.addEventListener("DOMContentLoaded", () => {
+    applyStockData("AAPL", "stock_block_1_1");
+    applyStockData("MSFT", "stock_block_1_2");
+    applyStockData("NET", "stock_block_1_3");
+    applyStockData("TSLA", "stock_block_2_1");
+    applyStockData("AMZN", "stock_block_2_2");
+    applyStockData("META", "stock_block_2_3");
+    applyStockData("INTC", "stock_block_3_1");
+    applyStockData("GOOGL", "stock_block_3_2");
+    applyStockData("NVDA", "stock_block_3_3");
+});

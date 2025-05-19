@@ -117,7 +117,7 @@ function createWarningWindow() {
 // Animate warning box and display reason
 function warning_slider(arg) {
     createWarningWindow();
-    plingSound();
+    playSound("pling");
 
     const elem = document.getElementById("warning_window");
 

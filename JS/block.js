@@ -35,9 +35,10 @@ function spawnStocks(){
 
     selected_stocks.forEach(element => { 
         console.log("Parsing element:" + element);
-        for(let i=1; i<3; i++){
-            for(let j=1; j<3; j++){
+        for(let i=1; i<=3; i++){
+            for(let j=1; j<=3; j++){
                 const row_block = `stock_block_${i}_${j}`;
+                console.log("TAGET BLOCK ID", row_block); //testing
                 if (!used_stocks.includes(element)) {
                     applyStockData(element, row_block); //api.js
                     used_stocks.push(element);
