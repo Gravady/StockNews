@@ -1,7 +1,4 @@
 //settings.js
-
-const { cache } = require("react");
-
 console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
