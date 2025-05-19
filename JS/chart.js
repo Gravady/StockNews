@@ -55,10 +55,7 @@ function createChart(data, numbers, size){
 	if (size + "" != "NaN"){
 		numbersSize = size;
 	}
-  ctx.style.height = chartParent.clientHeight + "px";
-  ctx.style.width = chartParent.clientWidth + "px";
-
-	console.log(numbersSize)
+  
 	chart1 = new Chart(ctx, {
 		type: 'line',
 		data: {
