@@ -1,5 +1,7 @@
 //settings.js
 
+const { cache } = require("react");
+
 console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
@@ -8,11 +10,7 @@ const setting_names = ["Darkmode", "Socials", "Colorblindness", "Language"];
 const setting_id_names = ["Darkmode, Socials, Colorblindness", "Language"];
 
 function isSettingActive(setting){
-    if(setting.includes(setting_id_names)){
-        const selected = getSelected(); //nav.js
-        return selected.includes(setting);
-    }
-    else if(document.getElementById(setting).includes(setting_id_names)){
+    if(setting_id_names.includes(settings)){
         const selected = getSelected(); //nav.js
         return selected.includes(setting);
     }
@@ -51,12 +49,10 @@ const applied_socials = [];
 function loadSocialMedia(){
     const socials = getSettingAttribute("Socials");
     if(socials.length < socialReq && applied_socials.length == socialReq){
-       forEach(el => {
+       socials.forEach(el => {
            loadSocialInGraph(el);
+           applied_socials.push(el);
        }) 
-    }
-    else {
-
     }
 }
 
@@ -101,12 +97,15 @@ function cacheOriginalStyles() {
 }
 
 function applyColorblindness(){
+    cacheOriginalStyles();
     document.querySelectorAll("*").forEach(el => {
         el.style.color = "lime";
         el.style.backgroundColor = "black";
         el.style.border = "1px solid green";
     });
 }
+
+applyColorblindness();
 
 function applyNormal() {
     document.querySelectorAll("*").forEach(el => {

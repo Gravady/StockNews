@@ -48,26 +48,26 @@
                 <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
                 <section id="sub_stock_menu">
                     <!--Id was needed for this, id is only for javascript to work-->
-                    <p class="stock" id="APPL">AAPL</p>
-                    <p class="stock" id="NVDA">NVDA</p>
-                    <p class="stock" id="INTC">INTC</p>
-                    <p class="stock" id="NET">NET</p>
-                    <p class="stock" id="TTWO">TTWO</p>
-                    <p class="stock" id="BYD">BYD</p>
-                    <p class="stock" id="GOOGL">GOOGL</p>
-                    <p class="stock" id="TSLA">TSLA</p>
-                    <p class="stock" id="AYRO">AYRO</p>
+                    <h5 class="stock" id="APPL">AAPL</h5>
+                    <h5 class="stock" id="NVDA">NVDA</h5>
+                    <h5 class="stock" id="INTC">INTC</h5>
+                    <h5 class="stock" id="NET">NET</h5>
+                    <h5 class="stock" id="TTWO">TTWO</h5>
+                    <h5 class="stock" id="BYD">BYD</h5>
+                    <h5 class="stock" id="GOOGL">GOOGL</h5>
+                    <h5 class="stock" id="TSLA">TSLA</h5>
+                    <h5 class="stock" id="AYRO">AYRO</h5>
                 </section>
             </div>
 
             <div class="general_wrapper">
                 <p id="nav_settings" title="Settings button" class="nav_button">Settings</p>
                 <section id="sub_setting_menu">
-                    <p id="DarkMode" class="setting" title="Darkmode">DarkMode</p>
-                    <p id="Language" class="setting" title="Language">Swedish</p>
-                    <p id="Colorblindness" class="setting" title="Colorblindness">Colorblindness</p>
+                    <h3 id="DarkMode" class="setting" title="Darkmode">DarkMode</h3>
+                    <h3 id="Language" class="setting" title="Language">Language</h3>
+                    <h3 id="Colorblindness" class="setting" title="Colorblindness">Colorblindness</h3>
                     <!--Social media examples-->
-                    <p id="sub_social_menu">
+                    <div id="sub_social_menu">
                         <p id="Socials" class="setting" title="Settings button placeholder">Social media</p>
                         <div class="general_wrapper">
                             <p>Twitter/X</p>
@@ -77,7 +77,7 @@
                             <p>4Chan</p>
                             <p>NYStockExchange</p>
                         </div>
-                    </p>
+                    </div>
                 </section>
             </div>
         </div> 
@@ -87,62 +87,62 @@
     </nav> 
     <!--Stock blocks will display possitive or negative-->
     <!--May be generated with javascript instead-->
-    <section class="stock_blocks" title="Stock block">
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_1_1">
+    <div class="stock_blocks" title="Stock block">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_1_1">
                 <h3>Stock1</h3>
                 <span>Stock status</span>  
-            </article>
-            <article class="stock_block" id="stock_block_1_2">
+            </section>
+            <section class="stock_block" id="stock_block_1_2">
                 <h3>Stock2</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_1_3">
+            </section>
+            <section class="stock_block" id="stock_block_1_3">
                 <h3>Stock3</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
+            </section>
+        </div>
 
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_2_1">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_2_1">
                 <h3>Stocks4</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_2_2">
+            </section>
+            <section class="stock_block" id="stock_block_2_2">
                 <h3>Stocks5</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_2_3">
+            </section>
+            <section class="stock_block" id="stock_block_2_3">
                 <h3>Stocks6</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
+            </section>
+        </div>
 
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_3_1">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_3_1">
                 <h3>Stock7</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_3_2">
+            </section>
+            <section class="stock_block" id="stock_block_3_2">
                 <h3>Stock8</h3>
                 <span>Stock staus</span>
-            </article>
-            <article class="stock_block" id="stock_block_3_3">
+            </section>
+            <section class="stock_block" id="stock_block_3_3">
                 <h3>Stock9</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
-    </section>
+            </section>
+        </div>
+    </div>
 
     <main>
         <img src="../Images/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"> 
         <div id="full_stock_wrapper">
-            <article id="stock_map_wrapper">
-                    <div id="stock_map_ui" title="Graphical chart of a certain stock">
+            <div id="stock_map_wrapper">
+                    <figure id="stock_map_ui" title="Graphical chart of a certain stock">
                         <canvas id="stock_canvas">Canvas test</canvas>
-                    </div>
+                    </figure>
                     <aside id="stock_map_settings" title="Graphical chart configuration settings"></aside>
-                <section id="media_items">
+                <div id="media_items">
                     <!--Media placeholder should be changed in javascript-->
                     <section id="media_1" class="media" title="media_placeholder_1">
                         <h3 id="social_media_title_1" class="social_media_title_class">Social media title</h3>
@@ -159,8 +159,8 @@
                         <p id="social_media_text_3" class="social_media_text_class">Social media text</p>
                         <div id="social_media_post_eval_3" class="social_media_post_eval_class">Post evaluation</div>
                     </section>
-                </section>
-            </article>
+                </div>
+            </div>
        </div>
     </main> 
     <footer>
