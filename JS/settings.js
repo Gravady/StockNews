@@ -59,11 +59,13 @@ document.getElementById("DarkMode").addEventListener("click", function(event) {
 
 //Bad code done quickly 
 const darkMode = document.getElementById("DarkMode");
-if(isSettingActive(darkMode)){
+if(darkMode.style.backgroundColor == "gray" && getSelected().includes("DarkMode")){
     is_darkmode = true;
+    darkMode.getElementsByID("DarkMode").style.backgroundColor = "gray";
     applyDarkMode();
 }
 else{
+    darkMode.style.backgroundColor = "transparent";
     is_darkmode = false;
     applyLightMode();
 }
@@ -99,6 +101,7 @@ function applyNormal() {
     });
 }
 
+
 //Lazy solution
 var is_colorblind = false;
 document.getElementById("Colorblindness").addEventListener("click", function(event) {  
@@ -118,7 +121,7 @@ document.getElementById("Colorblindness").addEventListener("click", function(eve
 
 //Bad code done quickly 
 const colorblindMode = document.getElementById("Colorblindness");
-if(isSettingActive(colorblindMode)){
+if(darkMode.style.backgroundColor == "gray" && getSelected().includes("Colorblindness")){
     is_darkmode = true;
     applyColorblindness();
 }
