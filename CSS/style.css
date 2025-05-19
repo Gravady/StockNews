@@ -14,17 +14,6 @@ a{
     text-decoration: none;
 }
 
-h3{
-    font: "normal";
-    font-weight: "normal";
-}
-
-h5{
-    font: "normal";
-    font-weight: "normal";
-
-}
-
 noscript {
     display: flex;
     flex-direction: column;
@@ -183,10 +172,6 @@ nav{
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/*--------------------------------------------------------------------*/
-#nav_about {
-
-}
 
 /*--------------------------------------------------------------------*/
 
@@ -225,17 +210,8 @@ nav{
     display:flex;
 }
 
-#nav_settings{
-
-}
-
 .setting{
     font-family: "normal";
-}
-
-/*REMOVE*/
-#Colorblindness{
-    font: "normal";
 }
 
 #sub_setting_menu {
