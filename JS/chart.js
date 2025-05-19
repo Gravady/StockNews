@@ -1,4 +1,4 @@
-/*import { Chart } from "chart.js";
+import { Chart } from "chart.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend,
   LineController,
   LineElement
-);*/
+);
 
 
 let ctx = document.getElementById('stock_canvas');
