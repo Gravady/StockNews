@@ -1,17 +1,14 @@
 //settings.js
+
+//NOTE setting.js does not work correctly
+
 console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
 
 function isSettingActive(setting){
     const selected = getSelected(); //nav.js
-    const setting_thing = document.getElementById(setting);
-    if(selected.includes(setting_thing)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return selected.includes(setting); 
 }
 
 //3 social medias are required
@@ -42,26 +39,36 @@ function applyDarkMode(){
 }
 
 var is_darkmode = false;
+const darkMode = document.getElementById("DarkMode");
 document.getElementById("DarkMode").addEventListener("click", function(event) {
     console.log("Darkmode button pressed");
-    if(is_colorblind){
+
+    if(isSettingActive("Colorblindness")){
+        is_darkmode = false;
+        darkMode.style.backgroundColor = "transparent";
+        darkMode.style.font = "normal";
+        applyLightMode();
         warning_slider("Colorblindness");
         return;
     }
+
     is_darkmode = !is_darkmode;
     if(is_darkmode){
+        darkMode.style.backgroundColor = "gray";
+        darkMode.style.font = "bold";
         applyDarkMode();
     }
     else{
+        darkMode.style.backgroundColor = "transparent";
+        darkMode.style.font = "normal";
         applyLightMode();
     }
 });
 
 //Bad code done quickly 
-const darkMode = document.getElementById("DarkMode");
-if(darkMode.style.backgroundColor == "gray" && getSelected().includes("DarkMode")){
+if(isSettingActive("DarkMode")){
     is_darkmode = true;
-    darkMode.getElementsByID("DarkMode").style.backgroundColor = "gray";
+    darkMode.style.backgroundColor = "gray";
     applyDarkMode();
 }
 else{
@@ -103,32 +110,45 @@ function applyNormal() {
 
 
 //Lazy solution
+const colorBlind = document.getElementById("Colorblindness");
 var is_colorblind = false;
-document.getElementById("Colorblindness").addEventListener("click", function(event) {  
-    if(is_darkmode){
-        warning_slider("Colorblindness");
+document.getElementById("Colorblindness").addEventListener("click", function(event) {
+    console.log("Darkmode button pressed");
+
+    if(isSettingActive("DarkMode")){
+        is_colorblind = false;
+        colorBlind.style.backgroundColor = "transparent";
+        colorBlind.style.font = "normal";
+        applyNormal();
+        warning_slider("DarkMode");
         return;
     }
+
+    is_colorblind = !is_colorblind;
     if(is_colorblind){
-        is_colorblind = false;
-        applyNormal();
+        colorBlind.style.backgroundColor = "transparent";
+        colorBlind.style.font = "bold";
+        applyColorblindness();
     }
     else{
-        is_colorblind = true;
-        applyColorblindness();
+        colorBlind.style.backgroundColor = "transparent";
+        colorBlind.style.font = "normal";
+        applyNormal();
     }
 });
 
 //Bad code done quickly 
-const colorblindMode = document.getElementById("Colorblindness");
-if(darkMode.style.backgroundColor == "gray" && getSelected().includes("Colorblindness")){
+if(isSettingActive("Colorblindness")){
     is_darkmode = true;
-    applyColorblindness();
+    colorBlind.style.backgroundColor = "gray";
+    applyDarkMode();
 }
 else{
+    colorBlind.style.backgroundColor = "transparent";
     is_darkmode = false;
-    applyNormal();
+    applyLightMode();
 }
+
 
 //----------------
 
@@ -233,12 +253,28 @@ document.addEventListener("keydown", function(event) {
     }
 })
 
-//automatic setting
+// automatic setting
 function automaticSettings() {
-    if (is_darkmode) {
+    if (isSettingActive("DarkMode")) {
+        is_darkmode = true;
+        darkMode.style.backgroundColor = "gray";
         applyDarkMode();
+    } else {
+        is_darkmode = false;
+        darkMode.style.backgroundColor = "transparent";
+        applyLightMode();
     }
-    if (is_colorblind) {
+
+    if (isSettingActive("Colorblindness") && !is_darkmode) {
+        is_colorblind = true;
         applyColorblindness();
+    } else {
+        is_colorblind = false;
+        applyNormal();
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM loaded, applying automatic settings");
+    automaticSettings();
+});
