@@ -13,3 +13,5 @@ function loadSocial(){
 }
 
 document.getElementById("Socials").addEventListener("click", loadSocial);
+
+loadSocial();
