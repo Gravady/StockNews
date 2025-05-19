@@ -42,6 +42,8 @@ let numbersSize = 20;
         changeShart();
         console.log("chart cleared");
       }
+
+      //test commit
       
       document.addEventListener("DOMContentLoaded", () => {
         clearChart();
