@@ -4,32 +4,21 @@ console.log("Settings is working");
 
 const settings = JSON.parse(localStorage.getItem("Settings")) || [];
 
-//Get setting attribute name
-function getSettingAttribute(name){
-   settings.forEach(el => {
-        if(el[name] != undefined){
-            return el[name];
-        }
-   }); 
-   console.error("Setting not found");
-   return null;
-}
+const setting_names = ["Darkmode", "Socials", "Colorblindness", "Language"];
+const setting_id_names = ["Darkmode, Socials, Colorblindness", "Language"];
 
-//See if setting is active
-function isSettingActive(name){
-    const el = getSettingAttribute(name);
-    if(!el){
-        console.error("ELement not found: ", name);
-        return false;
-    } 
-
-    const color = window.getComputedStyle(el).backgroundColor;
-    if (color === "rgb(128, 128, 128)" || color === "gray") {
-        return true;
-    } else if (color === "transparent" || color === "rgba(0, 0, 0, 0)") {
+function isSettingActive(setting){
+    if(setting.includes(setting_id_names)){
+        const selected = getSelected(); //nav.js
+        return selected.includes(setting);
+    }
+    else if(document.getElementById(setting).includes(setting_id_names)){
+        const selected = getSelected(); //nav.js
+        return selected.includes(setting);
+    }
+    else{
         return false;
     }
-    return false; 
 }
 
 //Apply settings
@@ -40,8 +29,18 @@ function applySettings(){
     else{
         applyLightMode();
     }
-}
 
+    if(isSettingActive("Socials")){
+        loadSocialMedia();
+    }
+
+    if(isSettingActive("Colorblindness")){
+        applyColorblindness();
+    }
+    if(isSettingActive("Language")){
+        applyLanguage();
+    }
+}
 
 function applyLightMode(){
     document.body.style.filter = "invert(0)";
@@ -68,6 +67,49 @@ function loadSocialMedia(){
 
     }
 }
+
+//--------------------
+
+function cacheOriginalStyles() {
+    document.querySelectorAll("*").forEach(el => {
+        if (!el.hasAttribute("data-orig-color")) {
+            el.setAttribute("data-orig-color", el.style.color || "");
+            el.setAttribute("data-orig-bg", el.style.backgroundColor || "");
+            el.setAttribute("data-orig-border", el.style.border || "");
+        }
+    });
+}
+
+function applyColorblindness(){
+    document.querySelectorAll("*").forEach(el => {
+        el.style.color = "lime";
+        el.style.backgroundColor = "black";
+        el.style.border = "1px solid green";
+    });
+}
+
+function applyNormal() {
+    document.querySelectorAll("*").forEach(el => {
+        el.style.color = el.getAttribute("data-orig-color") || "";
+        el.style.backgroundColor = el.getAttribute("data-orig-bg") || "";
+        el.style.border = el.getAttribute("data-orig-border") || "";
+    });
+}
+
+//Lazy solution
+var is_colorblind = false;
+document.getElementById("Colorblindness").addEventListener("click", function(event) {  
+    if(is_colorblind){
+        is_colorblind = false;
+        applyNormal();
+    }
+    else{
+        is_colorblind = true;
+        applyColorblindness();
+    }
+});
+
+//----------------
 
 function createWarningWindow() {
     if (document.getElementById("warning_window")) return;

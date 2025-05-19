@@ -56,5 +56,5 @@ function updateStocks(){
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    spawnStocks();
+    //spawnStocks();
 });
