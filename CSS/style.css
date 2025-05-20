@@ -466,14 +466,22 @@ footer > * :hover {
 
 /*Mobile mobde*/
 @media only screen and (max-width: 500px) {
+    #stock_map_ui{
+        width:100%;
+    }
+
     .stock_blocks{
-        height:700px;
-        margin-bottom:40px;
+        height:750px;
+        margin-bottom:100px;
+        margin-top:20px;
     }
 
     .stock_row{
-        margin-top:0px;
-        margin-bottom:0px;
         height:30vh;
+    }
+
+    .stock_block{
+        margin-bottom:10px;
+        margin-top:10px;
     }
 }
