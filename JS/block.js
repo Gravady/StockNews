@@ -42,7 +42,7 @@ function spawnStocks() {
     const localStockPool = [...stock_array]; 
 
     let selected_stocks = getCurrentStocks(); // nav.js
-    if (selected_stocks.includes(document.getElementById("Socials").id)) {
+    if (selected_stocks.includes(document.getElementById("Socials").id) || selected_stocks.includes(document.getElementById("Colorblindness").id) || selected_stocks.includes(document.getElementById("DarkMode").id) || selected_stocks.includes(document.getElementById("Language").id)) {
         selected_stocks.pop();
     }
     console.log("Selected stocks:", selected_stocks);
@@ -77,7 +77,6 @@ const updateInterval = 30 * 60 * 60 * 60;
 function updateStocks(){
 
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
     spawnStocks();

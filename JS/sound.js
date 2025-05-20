@@ -10,7 +10,7 @@ function playSound(sound_name){
     soundMap[sound_name] = sound;
     sound.play();
 }
-
+//https://stackoverflow.com/questions/53987982/why-does-audio-not-play-in-javascript
 function stopSound(sound_name){
     const sound = soundMap[sound_name];
     if(sound){
