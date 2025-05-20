@@ -348,8 +348,13 @@ nav{
     }
 }
 
-/*Mobile mobde*/
+
+/*Mobile mode*/
 @media only screen and (max-width: 500px) {
+    .nav_button_wrapper {
+        margin-left:0px;
+    }
+
     .stock_block{
         margin-top:10px;
         margin-bottom:10px;

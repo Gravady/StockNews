@@ -466,6 +466,19 @@ footer > * :hover {
 
 /*Mobile mobde*/
 @media only screen and (max-width: 500px) {
+    
+
+    #media_items{
+        width:auto;
+        height:130%;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    .nav_button_wrapper{
+        margin-left:0;
+    }
+
     #stock_map_ui{
         width:100%;
     }
