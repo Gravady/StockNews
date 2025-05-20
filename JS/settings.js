@@ -120,7 +120,7 @@ document.getElementById("Colorblindness").addEventListener("click", function(eve
         colorBlind.style.backgroundColor = "transparent";
         colorBlind.style.font = "normal";
         applyNormal();
-        warning_slider("DarkMode");
+        warning_slider("Colorblindess");
         return;
     }
 
