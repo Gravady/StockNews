@@ -407,7 +407,7 @@ footer > * :hover {
         display:flex;
         flex-direction:column;
         flex-wrap:wrap;
-        height:610px;
+        height:700px;
         margin-top:10px;
         margin-bottom:10px;
     }
