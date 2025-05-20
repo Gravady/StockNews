@@ -407,10 +407,15 @@ footer > * :hover {
         display:flex;
         flex-direction:column;
         flex-wrap:wrap;
+        height:730px;
+        margin-top:0px;
+        margin-bottom:50px;
     }
+
+
     .stock_row{
-        margin-top:10px;
-        margin-bottom:10px;
+        margin-top:20px;
+        margin-bottom:20px;
         width:80%;
     }
 
@@ -462,10 +467,10 @@ footer > * :hover {
 
 /*Mobile mobde*/
 @media only screen and (max-width: 500px) {
-    .stock_block{
-        margin-top:10px;
-        margin-bottom:10px;
+    .stock_blocks{
+        margin-top:40px;
     }
+
     .stock_row{
         margin-top:10px;
         margin-bottom:10px;
