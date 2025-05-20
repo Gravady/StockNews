@@ -13,7 +13,7 @@
     <meta name="revised" content="Monday, April 7th, 2025, 10:51"> <!--Change time when revised-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="key_placeholder"> 
-    <meta name="robots" content="noindex, follow, noarchive">
+    <meta name="robots" content="index, follow">
     <meta name="author" content="name_placeholder">
     <meta name="owner" content="name_placeholder">
     <meta name="description" content="Web stock exchange live feed!">
@@ -25,13 +25,13 @@
 
     <!--Google SEO-->
     <meta name="googlebot-news" content="nosnippet">
-    <meta name="googlebot" content="translate, follow, noindex, noarchive">
+    <meta name="googlebot" content="translate, follow, index">
 
     <!--General-->
     
 
-  <script type="module" crossorigin src="/StockNews/assets/index-46acf0e5.js"></script>
-  <link rel="stylesheet" href="/StockNews/assets/index-9fd6356e.css">
+  <script type="module" crossorigin src="/assets/index-fc6d28cc.js"></script>
+  <link rel="stylesheet" href="/assets/index-7bc17017.css">
 </head>
 <body>
     <!--Javascript popup-->
@@ -50,37 +50,26 @@
                 <div id="nav_stocks" title="Stocks button" class="nav_button">Stocks</div>
                 <section id="sub_stock_menu">
                     <!--Id was needed for this, id is only for javascript to work-->
-                    <p class="stock" id="APPL">AAPL</p>
-                    <p class="stock" id="NVDA">NVDA</p>
-                    <p class="stock" id="INTC">INTC</p>
-                    <p class="stock" id="NET">NET</p>
-                    <p class="stock" id="TTWO">TTWO</p>
-                    <p class="stock" id="BYD">BYD</p>
-                    <p class="stock" id="GOOGL">GOOGL</p>
-                    <p class="stock" id="TSLA">TSLA</p>
-                    <p class="stock" id="AYRO">AYRO</p>
-                    <p class="stock" id="BTC">BTC</p>
+                    <h5 class="stock" id="APPL">AAPL</h5>
+                    <h5 class="stock" id="NVDA">NVDA</h5>
+                    <h5 class="stock" id="INTC">INTC</h5>
+                    <h5 class="stock" id="NET">NET</h5>
+                    <h5 class="stock" id="TTWO">TTWO</h5>
+                    <h5 class="stock" id="BYD">BYD</h5>
+                    <h5 class="stock" id="GOOGL">GOOGL</h5>
+                    <h5 class="stock" id="TSLA">TSLA</h5>
+                    <h5 class="stock" id="AYRO">AYRO</h5>
                 </section>
             </div>
 
             <div class="general_wrapper">
                 <p id="nav_settings" title="Settings button" class="nav_button">Settings</p>
-                <section id="sub_setting_menu">
-                    <p id="setting1" class="setting" title="Settings button placeholder">DarkMode</p>
-                    <p id="setting2" class="setting" title="Settings button placeholder">Language</p>
-                    <!--Social media examples-->
-                    <p id="sub_social_menu">
-                        <p id="setting3" class="setting" title="Settings button placeholder">Social media</p>
-                        <div class="general_wrapper">
-                            <p>Twitter/X</p>
-                            <p>Instagram</p>
-                            <p>Facebook</p>
-                            <p>Reddit</p>
-                            <p>4Chan</p>
-                            <p>NYStockExchange</p>
-                        </div>
-                    </p>
-                </section>
+                <article id="sub_setting_menu">
+                    <p id="DarkMode" class="setting" title="Darkmode">DarkMode</p>
+                    <p id="Language" class="setting" title="Language">Language</p>
+                    <p id="Colorblindness" class="setting" title="Colorblindness">Colorblindness</p>
+                    <p id="Socials" class="setting" title="Socials">Social media</p>
+                </article>
             </div>
         </div> 
         
@@ -89,62 +78,62 @@
     </nav> 
     <!--Stock blocks will display possitive or negative-->
     <!--May be generated with javascript instead-->
-    <section class="stock_blocks" title="Stock block">
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_1_1">
+    <div class="stock_blocks" title="Stock block">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_1_1">
                 <h3>Stock1</h3>
                 <span>Stock status</span>  
-            </article>
-            <article class="stock_block" id="stock_block_1_2">
+            </section>
+            <section class="stock_block" id="stock_block_1_2">
                 <h3>Stock2</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_1_3">
+            </section>
+            <section class="stock_block" id="stock_block_1_3">
                 <h3>Stock3</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
+            </section>
+        </div>
 
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_2_1">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_2_1">
                 <h3>Stocks4</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_2_2">
+            </section>
+            <section class="stock_block" id="stock_block_2_2">
                 <h3>Stocks5</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_2_3">
+            </section>
+            <section class="stock_block" id="stock_block_2_3">
                 <h3>Stocks6</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
+            </section>
+        </div>
 
-        <section class="stock_row">
-            <article class="stock_block" id="stock_block_3_1">
+        <div class="stock_row">
+            <section class="stock_block" id="stock_block_3_1">
                 <h3>Stock7</h3>
                 <span>Stock status</span>
-            </article>
-            <article class="stock_block" id="stock_block_3_2">
+            </section>
+            <section class="stock_block" id="stock_block_3_2">
                 <h3>Stock8</h3>
                 <span>Stock staus</span>
-            </article>
-            <article class="stock_block" id="stock_block_3_3">
+            </section>
+            <section class="stock_block" id="stock_block_3_3">
                 <h3>Stock9</h3>
                 <span>Stock status</span>
-            </article>
-        </section>
-    </section>
+            </section>
+        </div>
+    </div>
 
     <main>
         <img src="../Images/new-york-stock-exchange.jpeg" alt="New York Stock Exchange Image"> 
         <div id="full_stock_wrapper">
-            <article id="stock_map_wrapper">
-                    <div id="stock_map_ui" title="Graphical chart of a certain stock">
+            <div id="stock_map_wrapper">
+                    <figure id="stock_map_ui" title="Graphical chart of a certain stock">
                         <canvas id="stock_canvas">Canvas test</canvas>
-                    </div>
+                    </figure>
                     <aside id="stock_map_settings" title="Graphical chart configuration settings"></aside>
-                <section id="media_items">
+                <div id="media_items">
                     <!--Media placeholder should be changed in javascript-->
                     <section id="media_1" class="media" title="media_placeholder_1">
                         <h3 id="social_media_title_1" class="social_media_title_class">Social media title</h3>
@@ -161,8 +150,8 @@
                         <p id="social_media_text_3" class="social_media_text_class">Social media text</p>
                         <div id="social_media_post_eval_3" class="social_media_post_eval_class">Post evaluation</div>
                     </section>
-                </section>
-            </article>
+                </div>
+            </div>
        </div>
     </main> 
     <footer>
@@ -182,6 +171,5 @@
     <script src="JS/search.js"></script>
     <script src="JS/rgb.js"></script>
     <script src="JS/hacked.js"></script>
-    
 </body>
 </html>
