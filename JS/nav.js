@@ -124,7 +124,7 @@ document.querySelectorAll(".stock").forEach((el, index) => {
             toggleSelection(el);
             //FIX: Fix this so that it works correctly so that if a seelcted item is clicked again and there is no UI selected
             const computedStyle = window.getComputedStyle(el);
-            if(computerdStyle.backgroundColor == "gray" && (getSelectedUI().length == 0 || getSelectedUI == null)){
+            if(computedStyle.backgroundColor == "gray" && (getSelectedUI().length == 0 || getSelectedUI == null)){
                 console.log("Selected UI");
                 toggleUISelection(el);
             }

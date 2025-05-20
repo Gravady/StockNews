@@ -1,9 +1,6 @@
 //block.js
 
 console.log("Block is working");
-
-import { applyStockData } from './api.js';
-
 //Default array of valid arrays, length=9
 //CHATGPT
 const stock_array = [
