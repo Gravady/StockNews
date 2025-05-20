@@ -8,7 +8,7 @@ window.stockChartData = {};
 
 //symbol is the current stock selected and apply the stock to the id
 //stock_block_id = id of current element
-function applyStockData(symbol, stock_block_id){
+function applyStockData(symbol, stock_block_id, is_ui = false){
     console.log("Applying stock data for symbol:", symbol);
     console.log("stock_block_id:", stock_block_id);
 
