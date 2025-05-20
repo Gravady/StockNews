@@ -67,7 +67,7 @@ function spawnStocks() {
         }
 
         usedStocks.add(stock);
-        applyStockData(stock, block_ids[k]);
+        applyStockData(stock, block_ids[k]); //api.js
     }
 }
 
