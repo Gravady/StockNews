@@ -42,7 +42,7 @@ function spawnStocks() {
     const localStockPool = [...stock_array]; 
 
     let selected_stocks = getCurrentStocks(); // nav.js
-    if (selected_stocks.includes(document.getElementById("Socials").id) || selected_stocks.includes(document.getElementById("Colorblindness").id) || selected_stocks.includes(document.getElementById("DarkMode").id) || selected_stocks.includes(document.getElementById("Language").id)) {
+    if (selected_stocks.includes(document.getElementById("Socials")) || selected_stocks.includes(document.getElementById("Colorblindness")) || selected_stocks.includes(document.getElementById("DarkMode")) || selected_stocks.includes(document.getElementById("Language"))) {
         selected_stocks.pop();
     }
     console.log("Selected stocks:", selected_stocks);
@@ -78,6 +78,6 @@ function updateStocks(){
 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventLigestener("DOMContentLoaded", () => {
     spawnStocks();
 });
