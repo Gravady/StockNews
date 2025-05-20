@@ -287,3 +287,76 @@ nav{
     width: 200px;
     grid-area: nav_searchbar;
 }
+
+
+/*Ipad mode*/
+@media only screen and (max-width: 800px) {
+  .stock_blocks{
+        display:flex;
+        flex-direction:column;
+        flex-wrap:wrap;
+    }
+    .stock_row{
+        margin-top:10px;
+        margin-bottom:10px;
+        width:80%;
+    }
+
+    /*Makes it so that the stock ui goes ontop and the comments on the bottom*/
+    #stock_map_ui{
+        width:100%;
+    }
+
+    #media_items{
+        width:auto;
+        height:130%;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    .media{
+        align-self: center;
+        height: 40%;
+        width: 100%;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    .media > * {
+        margin-top:1px;
+        margin-bottom:3px;
+        margin-right:10px;
+        margin-left: 10px;
+    }
+
+    #stock_map_wrapper {
+        height: 150vh;
+        flex-direction: column;
+    }
+
+    #stock_map_ui {
+        height: 1500px;
+    }
+
+    nav {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 100%; 
+        grid-template-areas: 
+        "nav_button_wrapper" 
+        "nav_title"
+        "nav_searchbar";
+    }
+}
+
+/*Mobile mobde*/
+@media only screen and (max-width: 500px) {
+    .stock_block{
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    .stock_row{
+        margin-top:10px;
+        margin-bottom:10px;
+        height:30vh;
+    }
+}

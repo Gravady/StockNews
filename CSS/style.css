@@ -399,6 +399,10 @@ footer > * :hover {
 
 /*Ipad mode*/
 @media only screen and (max-width: 800px) {
+    #nav_button_wrapper{
+        margin-left:0;
+    }
+
   .stock_blocks{
         display:flex;
         flex-direction:column;
