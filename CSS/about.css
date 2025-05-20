@@ -304,7 +304,7 @@ nav{
 
     /*Makes it so that the stock ui goes ontop and the comments on the bottom*/
     #stock_map_ui{
-        width:100%;
+        width:1000px;
     }
 
     #media_items{
